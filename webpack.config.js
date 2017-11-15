@@ -12,32 +12,35 @@ const config = {
     path: path.resolve(__dirname, 'dist'),
     filename: './[name].bundle.js',
     publicPath: '/public/',
-    chunkFilename: '[name].js'
+    // chunkFilename: '[name].js'
   },
   module: {
     rules: [
-        {test: /\.css$/, loader: "style!css?sourceMap!postcss"},
-        {test: /\.less$/, loader: "style!css!less|postcss"},
-        {test: /\.scss$/, loader: "style!css!sass|postcss"},
+        {
+          test: /\.(less|css)?$/, 
+          loader: ["style-loader", "css-loader", "less-loader", "postcss-loader"]
+        },
         {
             test: /\.(js|jsx)$/,
             use: ['babel-loader'],
             exclude: /node_modules/,
-            // include: path.join(__dirname, 'App')
         },
-        {test: /\.jsx$/, loader: "jsx-loader"},
         {test: /\.(jpg|png)$/, loader: "url?limit=8192"},
+        // { test: /\.(woff|svg|eot|ttf)?$/, loader: "url-loader" },
         {
             test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
             loader: 'file-loader'
         },
-        {test: /\.json$/,loader: 'json'},
-        {test: /\.html$/,loader: 'raw'},
+        {test: /\.json$/,loader: 'json-loader'},
+        {test: /\.html$/,loader: 'raw-loader'},
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
-    // new HtmlWebpackPlugin({template: './public/index.html'})
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+          warnings: false
+      }
+    }),
   ]
 };
 
