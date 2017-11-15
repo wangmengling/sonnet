@@ -1,5 +1,6 @@
 const Koa = require('koa')
 const app = new Koa()
+const Send = require('koa-send');
 const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
@@ -43,12 +44,16 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+// app.use(index.routes(), index.allowedMethods())
+// app.use(users.routes(), users.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
+
+app.use(async (ctx) => {
+  await Send(ctx, '/public/index.html');
+})
 
 module.exports = app
