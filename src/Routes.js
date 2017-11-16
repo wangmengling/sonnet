@@ -7,6 +7,7 @@ import {
 import App from './App';
 import About from './About';
 import Login from './Login/Login';
+import Register from './Register/Register';
 
 const Routes = () => (
     <Router>
@@ -14,6 +15,7 @@ const Routes = () => (
         <Route exact path="/" component={App}/>
         <Route exact path="/about" component={About}/>
         <Route exact path="/login" component={Login}/>
+        <Route exact path="/register" component={Register}/>
       </div>
     </Router>
   )
