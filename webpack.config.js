@@ -17,9 +17,17 @@ const config = {
   module: {
     rules: [
         {
-          test: /\.(less|css)?$/, 
-          loader: ["style-loader", "css-loader", "less-loader", "postcss-loader"]
+          test: /\.less$/, 
+          loader: ["style-loader", "css-loader", "postcss-loader", "less-loader"]  //postcss-loader 一定要放在  less-loader 前面 不然会出错
         },
+        {
+          test: /\.css$/, 
+          loader: ["style-loader", "css-loader", "postcss-loader"]
+        },
+        // {
+        //   test: /\.less$/, //antd的时候会出错
+        //   use: ["style-loader", {loader: 'css-loader', options: {sourceMap: 1}}, "postcss-loader", "less-loader"]
+        // },
         {
             test: /\.(js|jsx)$/,
             use: ['babel-loader'],

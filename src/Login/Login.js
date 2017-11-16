@@ -1,5 +1,6 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, DatePicker } from 'antd';
+
 const FormItem = Form.Item;
 import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
 class NormalLoginForm extends React.Component {
@@ -41,6 +42,8 @@ class NormalLoginForm extends React.Component {
             Log in
           </Button>
           Or <a href="">register now!</a>
+          <Button type="danger">Danger</Button>
+          <DatePicker />
         </FormItem>
       </Form>
     );
