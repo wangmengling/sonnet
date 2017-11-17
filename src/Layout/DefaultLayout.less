@@ -1,0 +1,29 @@
+.LayoutRoot {
+    display: flex;
+    flex-direction: row;
+    .LayoutSider {
+        position: absolute;
+        overflow: visible;
+        padding-bottom: 24px;
+        height: 100vh;
+        width:224px;
+        .LayoutSider-a {
+            width: 224px;
+        }
+    }
+    .LayoutRight {
+        margin-left: 224px;
+        overflow: auto;
+        height: 100vh;
+        -webkit-transition: all .3s ease-out;
+        -o-transition: all .3s ease-out;
+        transition: all .3s ease-out;
+        width: 100%;
+        .LayoutHeader {
+            width: 100%;
+        }
+        .LayoutContent {
+            margin: 20px;
+        }
+    }
+}

@@ -35,49 +35,53 @@ class RegistrationForm extends React.Component {
             autoCompleteResult: [],
             confirmDirty: false
         }
-        this.changeUsername = this.changeUsername.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleConfirmBlur = this.handleConfirmBlur.bind(this);
+        this.checkPassword = this.checkPassword.bind(this);
+        this.checkConfirm = this.checkConfirm.bind(this);
+        this.handleWebsiteChange = this.handleWebsiteChange.bind(this);
     }
 //   state = {
 //     confirmDirty: false,
 //     autoCompleteResult: [],
 //   };
-//   handleSubmit = (e) => {
-//     e.preventDefault();
-//     this.props.form.validateFieldsAndScroll((err, values) => {
-//       if (!err) {
-//         console.log('Received values of form: ', values);
-//       }
-//     });
-//   }
-//   handleConfirmBlur = (e) => {
-//     const value = e.target.value;
-//     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-//   }
-//   checkPassword = (rule, value, callback) => {
-//     const form = this.props.form;
-//     if (value && value !== form.getFieldValue('password')) {
-//       callback('Two passwords that you enter is inconsistent!');
-//     } else {
-//       callback();
-//     }
-//   }
-//   checkConfirm = (rule, value, callback) => {
-//     const form = this.props.form;
-//     if (value && this.state.confirmDirty) {
-//       form.validateFields(['confirm'], { force: true });
-//     }
-//     callback();
-//   }
+  handleSubmit(e){
+    e.preventDefault();
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  }
+  handleConfirmBlur(e){
+    const value = e.target.value;
+    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+  }
+  checkPassword(rule, value, callback){
+    const form = this.props.form;
+    if (value && value !== form.getFieldValue('password')) {
+      callback('Two passwords that you enter is inconsistent!');
+    } else {
+      callback();
+    }
+  }
+  checkConfirm(rule, value, callback) {
+    const form = this.props.form;
+    if (value && this.state.confirmDirty) {
+      form.validateFields(['confirm'], { force: true });
+    }
+    callback();
+  }
 
-//   handleWebsiteChange = (value) => {
-//     let autoCompleteResult;
-//     if (!value) {
-//       autoCompleteResult = [];
-//     } else {
-//       autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
-//     }
-//     this.setState({ autoCompleteResult });
-//   }
+  handleWebsiteChange(value) {
+    let autoCompleteResult;
+    if (!value) {
+      autoCompleteResult = [];
+    } else {
+      autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
+    }
+    this.setState({ autoCompleteResult });
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;

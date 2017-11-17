@@ -1,20 +1,29 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox, DatePicker } from 'antd';
-
+import { Link } from "react-router-dom";
+import "./Login.less";
 const FormItem = Form.Item;
-import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
 class NormalLoginForm extends React.Component {
-//   handleSubmit = (e) => {
-//     e.preventDefault();
-//     this.props.form.validateFields((err, values) => {
-//       if (!err) {
-//         console.log('Received values of form: ', values);
-//       }
-//     });
-//   }
+  constructor(props){
+    super(props);
+    this.state = {
+      
+    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+}
+  handleSubmit(e){
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
+      <div className="Login-Root">
+        <div className="Login-Dash">
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
           {getFieldDecorator('userName', {
@@ -41,11 +50,11 @@ class NormalLoginForm extends React.Component {
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button>
-          Or <a href="">register now!</a>
-          <Button type="danger">Danger</Button>
-          <DatePicker />
+          Or <a href="/register">register now!</a>
         </FormItem>
       </Form>
+      </div>
+      </div>
     );
   }
 }
@@ -53,3 +62,6 @@ class NormalLoginForm extends React.Component {
 const Login = Form.create()(NormalLoginForm);
 export default Login;
 // ReactDOM.render(<WrappedNormalLoginForm />, mountNode);
+
+
+
