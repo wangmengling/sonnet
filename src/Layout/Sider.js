@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
+import { Link } from "react-router-dom";
 const SubMenu = Menu.SubMenu;
 
 class Sider extends React.Component {
@@ -49,13 +50,13 @@ class Sider extends React.Component {
         onOpenChange={this.onOpenChange}
         onClick={this.handleClick}
       >
-        <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
-          <Menu.Item key="1">Option 1</Menu.Item>
-          <Menu.Item key="2">Option 2</Menu.Item>
+        {/* <SubMenu key="sub1" title={<span><Icon type="laptop" /><span>面板</span></span>}> */}
+          <Menu.Item key="1"><Link to="/dashBoard" ><span><Icon type="laptop" /><span>面板</span></span></Link></Menu.Item>
+          {/* <Menu.Item key="2">Option 2</Menu.Item>
           <Menu.Item key="3">Option 3</Menu.Item>
           <Menu.Item key="4">Option 4</Menu.Item>
-        </SubMenu>
-        <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Navigation Two</span></span>}>
+        </SubMenu> */}
+        <SubMenu key="sub2" title={<span><Icon type="user" /><span>用户</span></span>}>
           <Menu.Item key="5">Option 5</Menu.Item>
           <Menu.Item key="6">Option 6</Menu.Item>
           <SubMenu key="sub3" title="Submenu">

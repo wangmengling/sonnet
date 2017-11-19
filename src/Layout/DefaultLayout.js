@@ -7,9 +7,17 @@ import {
 } from 'react-router-dom'
 import Header from './Header'
 import Sider from './Sider'
+import Breadcrumbs from "../Breadcaumd/Breadcaumds";
 import './DefaultLayout.less'
 
-const DefaultLayout = ({ component: Component, rest}) => {
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={props => (
+        <Component {...props}/>
+    )}/>
+)
+
+const DefaultLayout = ({ component: Component, ...rest}) => {
     return (
         // call some method/function that will validate if user is logged in
         <Route {...rest} render={matchProps => (
@@ -20,6 +28,9 @@ const DefaultLayout = ({ component: Component, rest}) => {
                 <div className="LayoutRight">
                     <div className="LayoutHeader">
                         <Header />
+                    </div>
+                    <div className="LayoutBreadcrumb">
+                        <Breadcrumbs />
                     </div>
                     <div className="LayoutContent">
                         <Component {...matchProps} />

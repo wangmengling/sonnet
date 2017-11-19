@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^2.13.10",
+    "babel-preset-stage-1": "^6.24.1",
     "css-loader": "^0.28.7",
     "debug": "^2.6.3",
     "koa": "^2.2.0",

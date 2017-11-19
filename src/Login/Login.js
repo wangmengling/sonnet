@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox, DatePicker } from 'antd';
-import { Link } from "react-router-dom";
+import { Link ,withRouter} from "react-router-dom";
+
 import "./Login.less";
 const FormItem = Form.Item;
 class NormalLoginForm extends React.Component {
@@ -60,7 +61,7 @@ class NormalLoginForm extends React.Component {
 }
 
 const Login = Form.create()(NormalLoginForm);
-export default Login;
+export default withRouter(Login);
 // ReactDOM.render(<WrappedNormalLoginForm />, mountNode);
 
 

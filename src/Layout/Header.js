@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { Menu, Icon, Popover } from 'antd'
 import classnames from 'classnames'
 import  './Header.less'
-// import Menus from './Menu'
+// import Menus from './Menus'
 
-// const SubMenu = Menu.SubMenu
+const SubMenu = Menu.SubMenu
 
 const Header = ({ user, logout, switchSider, siderFold, isNavbar, menuPopoverVisible, location, switchMenuPopover, navOpenKeys, changeOpenKeys, menu }) => {
   let handleClickMenu = e => e.key === 'logout' && logout()
@@ -38,19 +38,19 @@ const Header = ({ user, logout, switchSider, siderFold, isNavbar, menuPopoverVis
           <Icon type="mail" />
         </div>
         <Menu mode="horizontal" onClick={handleClickMenu}>
-          {/* <SubMenu
+           <SubMenu
             style={{
               float: 'right',
             }}
             title={<span>
               <Icon type="user" />
-              {user.username}
+              {/* {user.username} */}
             </span>}
           >
             <Menu.Item key="logout">
               Sign out
             </Menu.Item>
-          </SubMenu> */}
+          </SubMenu>
         </Menu>
       </div>
     </div>
