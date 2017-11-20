@@ -11,6 +11,7 @@ import Login from './Login/Login';
 import Register from './Register/Register';
 import DefaultLayout from "./Layout/DefaultLayout";
 import DashBoard from "./DashBoard/DashBoard"
+import { UserList } from "./User";
 const Routes = () => (
     <Router history={hashRouter}>
       <div>
@@ -20,6 +21,7 @@ const Routes = () => (
         
         <DefaultLayout exact path="/register" component={Register}/>
         <DefaultLayout exact path="/dashBoard" component={DashBoard}/>
+        <DefaultLayout exact path="/user/list" component={UserList}/>
       </div>
     </Router>
   )
