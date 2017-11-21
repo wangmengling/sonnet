@@ -45,6 +45,7 @@
     "postcss-easy-import": "^3.0.0",
     "postcss-loader": "^2.0.8",
     "pug": "^2.0.0-rc.1",
+    "qs": "^6.5.1",
     "raw-loader": "^0.5.1",
     "react-countup": "^3.0.2",
     "sass-loader": "^6.0.6",

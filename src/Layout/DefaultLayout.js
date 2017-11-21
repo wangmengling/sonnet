@@ -9,18 +9,11 @@ import Header from './Header'
 import Sider from './Sider'
 import Breadcrumbs from "../Breadcaumd/Breadcaumds";
 import './DefaultLayout.less'
-
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={props => (
-        <Component {...props}/>
-    )}/>
-)
-
+import PrivateRoute from "../../utils/PrivateRoute";
 const DefaultLayout = ({ component: Component, ...rest}) => {
     return (
         // call some method/function that will validate if user is logged in
-        <Route {...rest} render={matchProps => (
+        <PrivateRoute {...rest} render={matchProps => (
             <div className='LayoutRoot'>
                 <div  className="LayoutSider">
                     <Sider className='LayoutSider-a' />
@@ -40,39 +33,5 @@ const DefaultLayout = ({ component: Component, ...rest}) => {
         )} />
     )
 };
-
-// /**
-//  * Class representing a route that checks if user is logged in.
-//  * @extends Route
-//  */
-// class AuthRequiredRoute extends Route{
-//     /**
-//      * @example <AuthRequiredRoute path="/" component={Products}>
-//      */
-//       render() {
-//           let component = super.render();
-//           let {user, path} = this.props;
-//           let match = this.state.match;
-//           if (match) {
-//               const authStore = new Auth();
-//               if (authStore.isLoggedIn) {
-//                   return component;
-//               } else {
-//                   return <Redirect to="/admin/login"></Redirect>;
-//               }
-//           } else {
-//             return null;
-//           }
-//       }
-  
-//       isLogin() {
-//            let userName = localStorage.getItem();
-//            if(!userName.length > 0) {
-//                return true;
-//            }else {
-//                return false;
-//            }
-//       }
-//   }
 
 export default DefaultLayout;
