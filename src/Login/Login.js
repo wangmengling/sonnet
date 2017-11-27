@@ -1,9 +1,11 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox, DatePicker } from 'antd';
 import { Link ,withRouter} from "react-router-dom";
+import { observer } from "mobx-react";
 
 import "./Login.less";
 const FormItem = Form.Item;
+@observer
 class NormalLoginForm extends React.Component {
   constructor(props){
     super(props);

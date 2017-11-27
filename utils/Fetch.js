@@ -12,7 +12,6 @@ const Fetch = axios.create({
     "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
   }
 });
-
 //POST传参序列化(添加请求拦截器)
 Fetch.interceptors.request.use(
   config => {

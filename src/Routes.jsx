@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import App from './App';
 import About from './About';
-import Login from './Login/Login';
+import Login from './Login/Index';
 import Register from './Register/Register';
 import DefaultLayout from "./Layout/DefaultLayout";
 import DashBoard from "./DashBoard/DashBoard"
