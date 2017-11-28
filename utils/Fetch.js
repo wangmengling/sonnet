@@ -7,7 +7,7 @@ const Fetch = axios.create({
   baseURL: "/", // 因为我本地做了反向代理
   timeout: 10000,
   responseType: "json",
-  withCredentials: true, // 是否允许带cookie这些
+  // withCredentials: true, // 是否允许带cookie这些
   headers: {
     "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
   }
@@ -41,12 +41,12 @@ Fetch.interceptors.request.use(
 Fetch.interceptors.response.use(
   res => {
     //对响应数据做些事
-    if (res.data && !res.data.success) {
-      message.error(res.data.error.message.message
-        ? res.data.error.message.message
-        : res.data.error.message);
-      return Promise.reject(res.data.error.message);
-    }
+    // if (res.data && res.data.code == 1) {
+    //   message.error(res.data.error.message.message
+    //     ? res.data.error.message.message
+    //     : res.data.error.message);
+    //   return Promise.reject(res.data.error.message);
+    // }
     return res;
   },
   error => {

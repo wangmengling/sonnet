@@ -19,8 +19,11 @@ class NormalLoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        this.props.store.login(values.userName,values.password)
       }
     });
+
+    // this.props.store.login(this.state.userName,this.state.userPassword)
   }
   render() {
     const { getFieldDecorator } = this.props.form;

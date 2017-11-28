@@ -1,3 +1,5 @@
+const BaseUrl = "http://localhost:5000";
+const APIV1 = `${BaseUrl}/admin/api/v1`;
 module.exports = {
     APIV1:'/admin/api/v1',
     api: {
