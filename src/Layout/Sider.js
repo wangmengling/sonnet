@@ -57,7 +57,7 @@ class Sider extends React.Component {
           <Menu.Item key="4">Option 4</Menu.Item>
         </SubMenu> */}
         <SubMenu key="sub2" title={<span><Icon type="user" /><span>用户</span></span>}>
-          <Menu.Item key="5">角色管理</Menu.Item>
+          <Menu.Item key="5"><Link to="/role/list" >角色管理</Link></Menu.Item>
          <Menu.Item key="6"> <Link to="/user/list" >用户列表</Link></Menu.Item>
           <SubMenu key="sub3" title="Submenu">
             <Menu.Item key="7">Option 7</Menu.Item>

@@ -1,4 +1,5 @@
 import React,{ Component } from "react";
+import { Link ,withRouter, Redirect} from "react-router-dom";
 import NumberCard from "./NumberCard";
 import { Row, Col, Card } from 'antd'
 import { color } from "../../utils/theme";
@@ -46,4 +47,4 @@ class DashBoard extends Component {
     }
 }
 
-export default DashBoard;
+export default withRouter(DashBoard);

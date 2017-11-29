@@ -1,6 +1,6 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Checkbox, DatePicker } from 'antd';
-import { Link ,withRouter} from "react-router-dom";
+import { Form, Icon, Input, Button, Checkbox, DatePicker, Spin } from 'antd';
+import { Link ,withRouter, Redirect} from "react-router-dom";
 import { observer } from "mobx-react";
 
 import "./Login.less";
@@ -22,11 +22,22 @@ class NormalLoginForm extends React.Component {
         this.props.store.login(values.userName,values.password)
       }
     });
-
-    // this.props.store.login(this.state.userName,this.state.userPassword)
   }
   render() {
     const { getFieldDecorator } = this.props.form;
+    const store = this.props.store;
+
+    let spinLoding = <Spin  size="small"  tip="登录中..."/>;
+    if (store.loading) {
+      spinLoding = <Spin  size="small"  tip="登录中..."/>;
+    }else {
+      spinLoding = "";
+    }
+
+    if (store.loginCompleted) {
+        this.props.history.push('/dashBoard');
+    }
+
     return (
       <div className="Login-Root">
         <div className="Login-Dash">
@@ -57,7 +68,9 @@ class NormalLoginForm extends React.Component {
             Log in
           </Button>
           Or <a href="/register">register now!</a>
+          <br />
         </FormItem>
+        <div className="Login-loading">{spinLoding}</div>
       </Form>
       </div>
       </div>

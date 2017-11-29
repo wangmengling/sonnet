@@ -19,6 +19,7 @@ const Header = ({ user, logout, switchSider, siderFold, isNavbar, menuPopoverVis
     navOpenKeys,
     changeOpenKeys,
   }
+
   return (
     <div className='header'>
       {isNavbar
@@ -44,10 +45,10 @@ const Header = ({ user, logout, switchSider, siderFold, isNavbar, menuPopoverVis
             }}
             title={<span>
               <Icon type="user" />
-              {/* {user.username} */}
+              {user.username}
             </span>}
           >
-            <Menu.Item key="logout">
+            <Menu.Item key="logout" >
               Sign out
             </Menu.Item>
           </SubMenu>

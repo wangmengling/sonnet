@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 
@@ -18,4 +19,4 @@ class About extends Component {
   }
 }
 
-export default About;
+export default withRouter(About);

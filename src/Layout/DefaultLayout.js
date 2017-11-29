@@ -10,28 +10,38 @@ import Sider from './Sider'
 import Breadcrumbs from "../Breadcaumd/Breadcaumds";
 import './DefaultLayout.less'
 import PrivateRoute from "../../utils/PrivateRoute";
+import UserStore from "../../stores/UserStore";
+import { UserList } from '../User/index';
+
 const DefaultLayout = ({ component: Component, ...rest}) => {
     return (
         // call some method/function that will validate if user is logged in
-        <PrivateRoute {...rest} render={matchProps => (
-            <div className='LayoutRoot'>
-                <div  className="LayoutSider">
-                    <Sider className='LayoutSider-a' />
+        
+        <Route {...rest} render={matchProps => (
+            UserStore.isLogin ? (
+                <div className='LayoutRoot'>
+                    <div  className="LayoutSider">
+                        <Sider className='LayoutSider-a' />
+                    </div>
+                    <div className="LayoutRight">
+                        <div className="LayoutHeader">
+                            <Header user={UserStore.userModel} logout={UserStore.signOut}/>
+                        </div>
+                        <div className="LayoutBreadcrumb">
+                            <Breadcrumbs />
+                        </div>
+                        <div className="LayoutContent">
+                            <Component {...matchProps} />
+                        </div>
+                    </div>
                 </div>
-                <div className="LayoutRight">
-                    <div className="LayoutHeader">
-                        <Header />
-                    </div>
-                    <div className="LayoutBreadcrumb">
-                        <Breadcrumbs />
-                    </div>
-                    <div className="LayoutContent">
-                        <Component {...matchProps} />
-                    </div>
-                </div>
-            </div>
+              ) : (
+                <Redirect to={{
+                  pathname: '/login',
+                  state: { from: matchProps.location }
+                }}/>
+              )
         )} />
     )
 };
-
 export default DefaultLayout;

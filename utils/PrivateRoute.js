@@ -11,7 +11,8 @@ import { message } from 'antd';
 import { setTimeout } from 'timers';
 
 const fakeAuth = {
-    isAuthenticated: false,
+    // isAuthenticated: localStorage.getItem("token"),
+    isAuthenticated: true,
     authenticate(cb) {
       this.isAuthenticated = true
       setTimeout(cb, 100) // fake async
@@ -22,7 +23,8 @@ const fakeAuth = {
     }
 }
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  return (
     <Route {...rest} render={props => (
         fakeAuth.isAuthenticated ? (
           <Component {...props}/>
@@ -33,6 +35,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
           }}/>
         )
     )}/>
-)
+  ) 
+ }
 
 export default PrivateRoute;
