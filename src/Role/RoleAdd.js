@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, InputNumber, Radio, Modal, Cascader } from 'antd'
+import { Form, Input, InputNumber, Radio, Modal, Cascader, Spin } from 'antd'
 
 const formItemLayout = {
     labelCol: {
@@ -10,7 +10,7 @@ const formItemLayout = {
       span: 14,
     },
   }
-
+const FormItem = Form.Item
 class RoleAdd extends React.Component {
     constructor(props) {
         super(props);
@@ -19,36 +19,41 @@ class RoleAdd extends React.Component {
         }
     }
     render() {
+        const store = this.props.store;
+        let spinLoding = <Spin  size="small"  tip="添加中..."/>;
+        if (store.loading) {
+          spinLoding = <Spin  size="small"  tip="添加中..."/>;
+        }else {
+          spinLoding = "";
+        }
         return (
-            
-            <div className="RoleAdd">
             <Modal {...this.props}>
-                <Form layout="horizontal">
-                    <FormItem label="Name" hasFeedback {...formItemLayout}>
-                    {getFieldDecorator('name', {
-                        initialValue: item.name,
-                        rules: [
-                        {
-                            required: true,
-                        },
-                        ],
-                    })(<Input />)}
-                    </FormItem>
-                </Form>
-                </Modal>
-            </div>
-            
+                <div className="RoleAdd">
+                    <Form layout="horizontal">
+                        <FormItem label="角色名称" hasFeedback {...formItemLayout}>
+                        {this.props.form.getFieldDecorator('name', {
+                            initialValue: "",
+                            rules: [
+                            {
+                                required: true,
+                            },
+                            ],
+                        })(<Input />)}
+                        </FormItem>
+                    </Form>
+                </div>
+                <div>{spinLoding}</div>
+            </Modal>
         )
     }
 }
 
 
-// RoleAdd.propTypes = {
-//     form: PropTypes.object.isRequired,
-//     type: PropTypes.string,
-//     item: PropTypes.object,
-//     onOk: PropTypes.func,
-// }
+RoleAdd.propTypes = {
+    form: PropTypes.object.isRequired,
+    type: PropTypes.string,
+    item: PropTypes.object,
+    onOk: PropTypes.func,
+}
   
   export default Form.create()(RoleAdd)
-// export default RoleAdd;

@@ -1,6 +1,7 @@
 import React,{ Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Table, Icon, Button } from 'antd';
+import { observer } from "mobx-react";
 import RoleAdd from "./RoleAdd";
 import "./Role.less";
 
@@ -9,7 +10,7 @@ const columns = [{
     dataIndex: 'name',
     key: 'name',
     width: 700,
-    render: text => <a href="#">d{text}</a>,
+    render: text => <a href="#">{text}</a>,
   },{
     title: '操作',
     key: 'action',
@@ -26,15 +27,7 @@ const columns = [{
       </span>
     ),
   }];
-  
-  const data = [];
-  for (let i = 1; i <= 10; i++) {
-    data.push({
-      key: i,
-      name: 'John Brown',
-      description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
-    });
-  }
+@observer
 class Role extends Component {
     constructor(props) {
         super(props);
@@ -45,31 +38,56 @@ class Role extends Component {
           size: 'default',
           rowSelection: {},
           scroll: undefined,
-          visible: false,
         }
     }
 
+    componentWillMount() {
+      this.props.store.getRoleList();
+    }
+
+    saveFormRef = (form) => {
+      this.form = form;
+    }
+
+    handleCancel = () => {
+      this.props.store.visible = false;
+    }
+
+    handleCreate = () => {
+      const form = this.form;
+      form.validateFields((err, values) => {
+        if (err) {
+          return;
+        }
+        // console.log('Received values of form: ', values);
+        // this.props.store.visible = false;
+        this.props.store.roleAdd(values.name);
+        // form.resetFields();
+      });
+    }
+
     onAdd() {
-        this.setState({ visible: true });
-      }
+        this.props.store.visible = true;
+    }
+
     render() {
+      const store = this.props.store;
         return (
-            <Modal {...modalOpts}>
             <div className="Role">
                 <div className="Role_Create_Button">
-                    <Button onClick={onAdd}>创建角色</Button>
+                    <Button onClick={this.onAdd.bind(this)}>创建角色</Button>
                 </div>
                 <div className="RoleList">
-                    <Table {...this.state} columns={columns} dataSource={data} />
+                    <Table {...this.state} columns={columns} dataSource={store.roleList} />
                 </div>
                 <RoleAdd
-                //   ref={this.saveFormRef}
-                  visible={this.state.visible}
-                //   onCancel={this.handleCancel}
-                //   onCreate={this.handleCreate}
+                  ref={this.saveFormRef}
+                  visible={store.visible}
+                  onCancel={this.handleCancel}
+                  onOk={this.handleCreate}
+                  store={store}
                 />
             </div>
-            </Model>
         );
     }
 }
