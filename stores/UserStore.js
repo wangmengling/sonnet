@@ -28,7 +28,7 @@ class UserStore {
         // }
         this.history = history;
         this.userModel = localStorage.getItem("userModel");
-        console.log(this.userModel);
+        // console.log(this.userModel);
     }
 
     @action login(userName,password) {
@@ -44,6 +44,7 @@ class UserStore {
                 localStorage.setItem("userModel",this.userModel);
             }
             this.loading = false;
+            message.info(data.message);
         }).catch((error) => {
             this.loading = false;
             message.info(error.message);
@@ -61,7 +62,7 @@ class UserStore {
     }
 
     @computed get loginCompleted() {
-        return this.userModel.token != null;
+        return this.userModel && this.userModel.token != null;
     }
 
     runAutorun() {

@@ -54,7 +54,6 @@ class Role extends Component {
       }
     render() {
         return (
-            <Modal {...modalOpts}>
             <div className="Role">
                 <div className="Role_Create_Button">
                     <Button onClick={onAdd}>创建角色</Button>
@@ -69,7 +68,6 @@ class Role extends Component {
                 //   onCreate={this.handleCreate}
                 />
             </div>
-            </Model>
         );
     }
 }

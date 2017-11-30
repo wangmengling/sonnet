@@ -20,9 +20,9 @@ class RoleAdd extends React.Component {
     }
     render() {
         return (
-            
-            <div className="RoleAdd">
             <Modal {...this.props}>
+            <div className="RoleAdd">
+            
                 <Form layout="horizontal">
                     <FormItem label="Name" hasFeedback {...formItemLayout}>
                     {getFieldDecorator('name', {
@@ -35,9 +35,9 @@ class RoleAdd extends React.Component {
                     })(<Input />)}
                     </FormItem>
                 </Form>
-                </Modal>
+                
             </div>
-            
+            </Modal>
         )
     }
 }
