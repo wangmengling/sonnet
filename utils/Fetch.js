@@ -47,6 +47,7 @@ Fetch.interceptors.response.use(
     //     : res.data.error.message);
     //   return Promise.reject(res.data.error.message);
     // }
+    console.log(res);
     return res;
   },
   error => {
