@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, InputNumber, Radio, Modal, Cascader } from 'antd'
+import { Form, Input, InputNumber, Radio, Modal, Cascader, Select } from 'antd'
 // import city from '../../utils/city'
 
 const FormItem = Form.Item
+const Option = Select.Option;
 
 const formItemLayout = {
   labelCol: {
@@ -17,6 +18,7 @@ const formItemLayout = {
 const modal = ({
   item = {},
   onOk,
+  roleStore,
   form: {
     getFieldDecorator,
     validateFields,
@@ -33,7 +35,6 @@ const modal = ({
         ...getFieldsValue(),
         key: item.key,
       }
-      data.address = data.address.join(' ')
       onOk(data)
     })
   }
@@ -43,12 +44,24 @@ const modal = ({
     onOk: handleOk,
   }
 
+  function handleChange(value) {
+    console.log(`selected ${value}`);
+  }
+  
+  function handleBlur() {
+    console.log('blur');
+  }
+  
+  function handleFocus() {
+    console.log('focus');
+  }
+
   return (
     <Modal {...modalOpts}>
       <Form layout="horizontal">
         <FormItem label="Name" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('name', {
-            initialValue: item.name,
+          {getFieldDecorator('username', {
+            initialValue: item.username,
             rules: [
               {
                 required: true,
@@ -56,82 +69,32 @@ const modal = ({
             ],
           })(<Input />)}
         </FormItem>
-        <FormItem label="NickName" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('nickName', {
-            initialValue: item.nickName,
+        <FormItem label="角色" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('role', {
+            initialValue: item.role,
             rules: [
               {
                 required: true,
-              },
-            ],
-          })(<Input />)}
-        </FormItem>
-        <FormItem label="Gender" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('isMale', {
-            initialValue: item.isMale,
-            rules: [
-              {
-                required: true,
-                type: 'boolean',
+                // type: 'boolean',
               },
             ],
           })(
-            <Radio.Group>
-              <Radio value>Male</Radio>
-              <Radio value={false}>Female</Radio>
-            </Radio.Group>
+            <Select
+              showSearch
+              style={{ width: 200 }}
+              placeholder="Select a person"
+              optionFilterProp="children"
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+            >
+             {roleStore.roleList.map(
+                (role, idx) => <Option value={role.name} rowKey={idx}>{role.name}</Option>
+              )}
+            </Select>
           )}
         </FormItem>
-        <FormItem label="Age" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('age', {
-            initialValue: item.age,
-            rules: [
-              {
-                required: true,
-                type: 'number',
-              },
-            ],
-          })(<InputNumber min={18} max={100} />)}
-        </FormItem>
-        <FormItem label="Phone" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('phone', {
-            initialValue: item.phone,
-            rules: [
-              {
-                required: true,
-                pattern: /^1[34578]\d{9}$/,
-                message: 'The input is not valid phone!',
-              },
-            ],
-          })(<Input />)}
-        </FormItem>
-        <FormItem label="E-mail" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('email', {
-            initialValue: item.email,
-            rules: [
-              {
-                required: true,
-                pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/,
-                message: 'The input is not valid E-mail!',
-              },
-            ],
-          })(<Input />)}
-        </FormItem>
-        {/* <FormItem label="Address" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('address', {
-            initialValue: item.address && item.address.split(' '),
-            rules: [
-              {
-                required: true,
-              },
-            ],
-          })(<Cascader
-            size="large"
-            style={{ width: '100%' }}
-            options={city}
-            placeholder="Pick an address"
-          />)}
-        </FormItem> */}
       </Form>
     </Modal>
   )

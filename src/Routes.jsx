@@ -12,7 +12,7 @@ import Register from './Register/Register';
 import DefaultLayout from "./Layout/DefaultLayout";
 import PrivateRoute from "../utils/PrivateRoute";
 import DashBoard from "./DashBoard/DashBoard"
-import { UserList } from "./User";
+import UserList from "./User";
 import Role from "./Role";
 const Routes = () => (
     <Router history={hashRouter}>

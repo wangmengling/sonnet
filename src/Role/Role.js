@@ -1,32 +1,9 @@
 import React,{ Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Table, Icon, Button } from 'antd';
+import { Table, Icon, Button, Popconfirm } from 'antd';
 import { observer } from "mobx-react";
 import RoleAdd from "./RoleAdd";
 import "./Role.less";
-
-const columns = [{
-    title: '角色名称',
-    dataIndex: 'name',
-    key: 'name',
-    width: 700,
-    render: text => <a href="#">{text}</a>,
-  },{
-    title: '操作',
-    key: 'action',
-    width: 360,
-    render: (text, record) => (
-      <span>
-        <a href="#">Action 一 {record.name}</a>
-        <span className="ant-divider" />
-        <a href="#">Delete</a>
-        <span className="ant-divider" />
-        <a href="#" className="ant-dropdown-link">
-          More actions <Icon type="down" />
-        </a>
-      </span>
-    ),
-  }];
 @observer
 class Role extends Component {
     constructor(props) {
@@ -39,6 +16,7 @@ class Role extends Component {
           rowSelection: {},
           scroll: undefined,
         }
+        // this.handleRoleUpdate = this.handleRoleUpdate.bind(this);
     }
 
     componentWillMount() {
@@ -51,6 +29,7 @@ class Role extends Component {
 
     handleCancel = () => {
       this.props.store.visible = false;
+      this.props.store.updateRole = {};
     }
 
     handleCreate = () => {
@@ -61,14 +40,57 @@ class Role extends Component {
         }
         // console.log('Received values of form: ', values);
         // this.props.store.visible = false;
-        this.props.store.roleAdd(values.name);
+        if (this.props.store.updateRole.name) {
+          this.props.store.roleUpdate(values.name,this.props.store.updateRole._id);
+        }else {
+          this.props.store.roleAdd(values.name);
+        }
         // form.resetFields();
       });
     }
 
     onAdd() {
+        this.props.store.updateRole = {};
         this.props.store.visible = true;
     }
+
+    onUpdate(index) {
+      // console.log(index);
+      const role = this.props.store.roleList[index]
+      // this.props.store.roleUpdate(index,role.name,role._id)
+      this.props.store.visible = true;
+      this.props.store.updateRole = role;
+    }
+
+    onDelete(index) {
+      // console.log(index);
+      const role = this.props.store.roleList[index]
+      this.props.store.roleDelete(index,role._id)
+    }
+
+    columns = [{
+      title: '角色名称',
+      dataIndex: 'name',
+      key: 'name',
+      width: 700,
+      render: text => <a href="#">{text}</a>,
+    },{
+      title: '操作',
+      key: 'action',
+      width: 360,
+      render: (text, record, index) => (
+        <span>
+          <a title="update"  className="mgl10" onClick={this.onUpdate.bind(this,index)}> update </a>
+          <span className="ant-divider" />
+          <Popconfirm title="删除不可恢复，你确定要删除吗?" onConfirm={this.onDelete.bind(this,index)} >  
+              <a title="用户删除"  className="mgl10" >  
+              <Icon type="delete"/>
+              </a>  
+              {/* onClick={this.onDelete.bind(this,index)} */}
+          </Popconfirm>
+        </span>
+      ),
+    }];
 
     render() {
       const store = this.props.store;
@@ -78,7 +100,7 @@ class Role extends Component {
                     <Button onClick={this.onAdd.bind(this)}>创建角色</Button>
                 </div>
                 <div className="RoleList">
-                    <Table {...this.state} columns={columns} dataSource={store.roleList} />
+                    <Table {...this.state} columns={this.columns} dataSource={store.roleList} />
                 </div>
                 <RoleAdd
                   ref={this.saveFormRef}

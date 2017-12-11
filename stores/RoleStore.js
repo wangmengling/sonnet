@@ -7,6 +7,7 @@ class RoleStore {
     @observable addLoading:boolean = false;
     @observable loading:boolean = false;
     @observable roleList = new Array();
+    @observable updateRole = {};
 
     @action roleAdd(name) {
         this.addLoading = true;
@@ -44,8 +45,47 @@ class RoleStore {
         });
     }
 
-    @action roleUpdate(name) {
+    @action roleUpdate(name,_id) {
+        this.addLoading = true;
+        Fetch.post(API.api.role.update,{
+              name: name,
+              _id:_id
+        }).then((response) => {
+            let data = response.data;
+            if (data.code == 1 && data.data) {
+                this.visible = false;
+                this.updateRole = {};
+            }
+            message.info(data.message);
+            this.addLoading = false;
+            this.getRoleList();
+        }).catch((error) => {
+            this.addLoading = false;
+            message.info(error.message);
+        });
+    }
 
+    @action roleDelete(index,_id) {
+        this.addLoading = true;
+        console.log(_id);
+        Fetch.post(API.api.role.delete,{
+              _id:_id
+        }).then((response) => {
+            let data = response.data;
+            if (data.code == 1 && data.data) {
+                this.visible = false;
+            }
+            message.info(data.message);
+            this.addLoading = false;
+            this.getRoleList();
+        }).catch((error) => {
+            this.addLoading = false;
+            message.info(error.message);
+        });
+    }
+
+    @computed get getVisible() {
+        return this.visible;
     }
 }
 export default new RoleStore();

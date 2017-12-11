@@ -23,8 +23,6 @@ const TwoColProps = {
 
 const Filter = ({
   onAdd,
-  isMotion,
-  switchIsMotion,
   onFilterChange,
   filter,
   form: {
@@ -80,18 +78,19 @@ const Filter = ({
 
   return (
     <Row gutter={24}>
-      <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-        {getFieldDecorator('name', { initialValue: name })(<Search placeholder="Search Name" size="large" onSearch={handleSubmit} />)}
-      </Col>
+      {/* <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
+        
+      </Col> */}
       <Col {...TwoColProps} xl={{ span: 10 }} md={{ span: 24 }} sm={{ span: 24 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
           <div >
-            <Button type="primary" size="large" className="margin-right" onClick={handleSubmit}>Search</Button>
-            <Button size="large" onClick={handleReset}>Reset</Button>
+          {getFieldDecorator('name', { initialValue: name })(<Search placeholder="Search Name" size="large" onSearch={handleSubmit} />)}
+            
           </div>
           <div>
-            <Switch style={{ marginRight: 16 }} size="large" defaultChecked={isMotion} onChange={switchIsMotion} checkedChildren={'Motion'} unCheckedChildren={'Motion'} />
-            <Button size="large" type="ghost" onClick={onAdd}>Create</Button>
+            <Button type="primary" size="large" style={{marginRight:20}} onClick={handleSubmit}>搜索</Button>
+            <Button size="large" style={{marginRight:20}}  onClick={handleReset}>重置</Button>
+            <Button size="large" type="ghost" onClick={onAdd}>创建用户</Button>
           </div>
         </div>
       </Col>

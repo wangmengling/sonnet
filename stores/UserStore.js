@@ -14,8 +14,17 @@ class UserStore {
 
     @observable loading: boolean = false;
 
+    @observable addLoading: boolean = false;
+    @observable visible: boolean = false;
+
     history = {};
 
+    /**
+     * UserList
+     */
+    @observable userList = [];
+    @observable searchParams = {};
+    @observable pageIndex = 0;
     /**
    * @constructor
    */
@@ -58,17 +67,57 @@ class UserStore {
     }
 
     @computed get isLogin() {
-        return localStorage.getItem("userModel") != null;
+        // return localStorage.getItem("token") != null;
+        console.log(localStorage.getItem("token"));
+        return true;
     }
 
     @computed get loginCompleted() {
         return this.userModel && this.userModel.token != null;
     }
 
-    runAutorun() {
-        autorun(() => {
-            
+    @action list(searchParams) {
+        this.loading = true;
+        console.log(searchParams);
+        Fetch.post(API.api.user.list,searchParams).then((response) => {
+            let data = response.data;
+            console.log(data);
+            if (data.code == 1 && data.data) {
+                this.userList = data.data["list"];
+                console.log(data.data.list);
+            }
+            this.loading = false;
+        }).catch((error) => {
+            this.loading = false;
+            message.info(error.message);
+            console.log(error);
         });
+    }
+
+    // 新增用户
+    @action userAdd(params) {
+        this.addLoading = true;
+        console.log(params);
+        Fetch.post(API.api.user.add,params).then((response) => {
+            let data = response.data;
+            console.log(data);
+            if (data.code == 1 && data.data) {
+                console.log(data.data);
+                this.visible = false
+                this.list();
+            }
+            message.info(data.message);
+            this.addLoading = false;
+        }).catch((error) => {
+            this.addLoading = false;
+            message.info(error.message);
+            console.log(error);
+            this.visible = false
+        });
+    }
+
+    @computed get getAddLoading() {
+        return this.addLoading;
     }
 }
 export default  new UserStore();

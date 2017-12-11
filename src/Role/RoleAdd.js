@@ -18,6 +18,7 @@ class RoleAdd extends React.Component {
             
         }
     }
+
     render() {
         const store = this.props.store;
         let spinLoding = <Spin  size="small"  tip="添加中..."/>;
@@ -26,13 +27,14 @@ class RoleAdd extends React.Component {
         }else {
           spinLoding = "";
         }
+
         return (
             <Modal {...this.props}>
                 <div className="RoleAdd">
                     <Form layout="horizontal">
                         <FormItem label="角色名称" hasFeedback {...formItemLayout}>
                         {this.props.form.getFieldDecorator('name', {
-                            initialValue: "",
+                            initialValue: store.updateRole.name,
                             rules: [
                             {
                                 required: true,

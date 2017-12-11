@@ -1,32 +1,31 @@
 import React,{ Component  } from "react";
 import Filter from "./Filter";
+import { withRouter } from "react-router-dom";
 import { Table, Icon, Switch, Radio, Form } from 'antd';
+import { observer } from "mobx-react";
 import UserAdd from "./UserAdd";
 const FormItem = Form.Item;
 import  "./UserList.less";
 
 const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  key: 'name',
+  title: '名字',
+  dataIndex: 'username',
+  key: 'username',
   width: 150,
   render: text => <a href="#">{text}</a>,
-}, {
-  title: 'Age',
-  dataIndex: 'age',
-  key: 'age',
-  width: 70,
-}, {
-  title: 'Address',
-  dataIndex: 'address',
-  key: 'address',
-}, {
-  title: 'Action',
+},{
+  title: '角色',
+  dataIndex: 'role',
+  key: 'role',
+  width: 150,
+  render: text => <a href="#">{text}</a>,
+},  {
+  title: '操作',
   key: 'action',
   width: 360,
   render: (text, record) => (
     <span>
-      <a href="#">Action 一 {record.name}</a>
+      <a href="#">Action 一 {record.username}</a>
       <span className="ant-divider" />
       <a href="#">Delete</a>
       <span className="ant-divider" />
@@ -37,21 +36,11 @@ const columns = [{
   ),
 }];
 
-const data = [];
-for (let i = 1; i <= 10; i++) {
-  data.push({
-    key: i,
-    name: 'John Brown',
-    age: `${i}2`,
-    address: `New York No. ${i} Lake Park`,
-    description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
-  });
-}
+
 
 // const expandedRowRender = record => <p>{record.description}</p>;
 const title = () => 'Here is title';
 const showHeader = true;
-const footer = () => 'Here is footer';
 const scroll = { y: 240 };
 
 const filterProps = {
@@ -93,7 +82,7 @@ const filterProps = {
   },
 }
 
-
+@observer
 class UserList extends Component {
     constructor(props) {
       super(props);
@@ -103,12 +92,17 @@ class UserList extends Component {
         pagination: true,
         size: 'default',
         showHeader,
-        footer,
         rowSelection: {},
         scroll: undefined,
-        visible: false,
+        
       }
       this.onAdd = this.onAdd.bind(this);
+      
+    }
+
+    componentWillMount() {
+      this.props.store.list({pageIndex:this.props.store.pageIndex});
+      this.props.roleStore.getRoleList();
     }
 
     handleToggle = (prop) => {
@@ -125,10 +119,6 @@ class UserList extends Component {
       this.setState({ showHeader: enable ? showHeader : false });
     }
   
-    handleFooterChange = (enable) => {
-      this.setState({ footer: enable ? footer : undefined });
-    }
-  
     handleRowSelectionChange = (enable) => {
       this.setState({ rowSelection: enable ? {} : undefined });
     }
@@ -139,30 +129,17 @@ class UserList extends Component {
     }
 
     handleCancel = () => {
-      this.setState({ visible: false });
+      // this.setState({ visible: false });
+      this.props.store.visible = false;
     }
 
-    handleCreate = () => {
-      const form = this.form;
-      form.validateFields((err, values) => {
-        if (err) {
-          return;
-        }
-  
-        console.log('Received values of form: ', values);
-        form.resetFields();
-        this.setState({ visible: false });
-      });
+    handleCreate = (data) => {
+      this.props.store.userAdd(data);
     }
 
     onAdd() {
-      // dispatch({
-      //   type: 'user/showModal',
-      //   payload: {
-      //     modalType: 'create',
-      //   },
-      // })
-      this.setState({ visible: true });
+      // this.setState({ visible: true });
+      this.props.store.visible = true;
     }
 
     render() {
@@ -174,16 +151,17 @@ class UserList extends Component {
                 <Filter {...filterProps} />
                 </div>
                 {/* <Table columns={columns} dataSource={data} onChange={onChange} /> */}
-                <Table {...this.state} columns={columns} dataSource={data} />
+                <Table {...this.state} columns={columns} dataSource={this.props.store.userList} />
                 <UserAdd
                   ref={this.saveFormRef}
-                  visible={this.state.visible}
+                  visible={this.props.store.visible}
                   onCancel={this.handleCancel}
-                  onCreate={this.handleCreate}
+                  onOk={this.handleCreate}
+                  roleStore={this.props.roleStore}
                 />
             </div>
         );
     }
 }
 
-export default UserList;
+export default withRouter(UserList);
