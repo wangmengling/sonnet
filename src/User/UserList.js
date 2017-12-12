@@ -1,7 +1,7 @@
 import React,{ Component  } from "react";
 import Filter from "./Filter";
 import { withRouter } from "react-router-dom";
-import { Table, Icon, Switch, Radio, Form } from 'antd';
+import { Table, Icon, Switch, Radio, Form, Popconfirm} from 'antd';
 import { observer } from "mobx-react";
 import UserAdd from "./UserAdd";
 const FormItem = Form.Item;
@@ -25,17 +25,46 @@ const columns = [{
   width: 360,
   render: (text, record) => (
     <span>
-      <a href="#">Action 一 {record.username}</a>
+      <a href="#">详情</a>
       <span className="ant-divider" />
-      <a href="#">Delete</a>
+      <a href="#">删除</a>
       <span className="ant-divider" />
-      <a href="#" className="ant-dropdown-link">
-        More actions <Icon type="down" />
-      </a>
     </span>
   ),
 }];
 
+const param = (updateAction,deleteAction) => {
+  return [{
+    title: '名字',
+    dataIndex: 'username',
+    key: 'username',
+    width: 150,
+    render: text => <a href="#">{text}</a>,
+  },{
+    title: '角色',
+    dataIndex: 'role',
+    key: 'role',
+    width: 150,
+    render: text => <a href="#">{text}</a>,
+  },  {
+    title: '操作',
+    key: 'action',
+    width: 360,
+    render: (text, record) => (
+      <span>
+        <a title="update"  className="mgl10" onClick={deleteAction}> update </a>
+        <span className="ant-divider" />
+        <Popconfirm title="删除不可恢复，你确定要删除吗?" onConfirm={deleteAction} >  
+            <a title="用户删除"  className="mgl10" >  
+            {/* <Icon type="delete"/> */}
+            删除
+            </a>  
+            {/* onClick={this.onDelete.bind(this,index)} */}
+        </Popconfirm>
+      </span>
+    ),
+  }];
+};
 
 
 // const expandedRowRender = record => <p>{record.description}</p>;
@@ -97,7 +126,8 @@ class UserList extends Component {
         
       }
       this.onAdd = this.onAdd.bind(this);
-      
+      this.deleteAction = this.deleteAction.bind(this);
+      this.updateAction = this.updateAction.bind(this);
     }
 
     componentWillMount() {
@@ -142,6 +172,14 @@ class UserList extends Component {
       this.props.store.visible = true;
     }
 
+    deleteAction() {
+      console.log("asdfasdfasdf");
+    }
+
+    updateAction() {
+      console.log("asdfasdfasdfddd=====");
+    }
+
     render() {
       const state = this.state;
       filterProps["onAdd"] = this.onAdd;
@@ -151,7 +189,7 @@ class UserList extends Component {
                 <Filter {...filterProps} />
                 </div>
                 {/* <Table columns={columns} dataSource={data} onChange={onChange} /> */}
-                <Table {...this.state} columns={columns} dataSource={this.props.store.userList} />
+                <Table {...this.state} columns={param(this.updateAction,this.deleteAction)} dataSource={this.props.store.userList} />
                 <UserAdd
                   ref={this.saveFormRef}
                   visible={this.props.store.visible}
