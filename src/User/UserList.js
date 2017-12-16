@@ -169,16 +169,39 @@ class UserList extends Component {
       this.props.store.list();
     }
 
+    onChangePage (current, pageSize) {
+      console.log(current);
+    }
+
     render() {
       const state = this.state;
       this.filterProps["onAdd"] = this.onAdd;
+      const store = this.props.store;
         return (
             <div>
                 <div className="userList-filter">
                 <Filter {...this.filterProps} onFilterChange={this.onFilterChange.bind(this)}/>
                 </div>
                 {/* <Table columns={columns} dataSource={data} onChange={onChange} /> */}
-                <Table {...this.state} columns={param(this.updateAction,this.deleteAction)} dataSource={this.props.store.userList} />
+                <Table  {...this.state} 
+                columns={param(this.updateAction,this.deleteAction)} 
+                dataSource={this.props.store.userList} 
+                pagination={{  //分页
+                  total: store.count, //数据总数量
+                  pageSize: store.pageSize,  //显示几条一页
+                  defaultPageSize: store.pageIndex, //默认显示几条一页
+                  showSizeChanger: true,  //是否显示可以设置几条一页的选项
+                  onShowSizeChange(current, pageSize) {  //当几条一页的值改变后调用函数，current：改变显示条数时当前数据所在页；pageSize:改变后的一页显示条数
+                  　　self.toSelectchange(current, pageSize); //这边已经设置了self = this
+                  },
+                  onChange(current) {  //点击改变页数的选项时调用函数，current:将要跳转的页数
+                      self.onChangePage(current, store.pageSize);
+                  },                                         
+                  showTotal: function () {  //设置显示一共几条数据
+                      return '共 ' + store.count + ' 条数据'; 
+                  }
+                }}
+                />
                 <UserAdd
                   ref={this.saveFormRef}
                   visible={this.props.store.visible}

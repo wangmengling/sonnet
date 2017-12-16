@@ -25,6 +25,8 @@ class UserStore {
     @observable userList = [];
     @observable searchParams = {};
     @observable pageIndex = 0;
+    @observable pageCount = 0;
+    @observable count = 0;
     /**
    * @constructor
    */
@@ -86,6 +88,8 @@ class UserStore {
             console.log(data);
             if (data.code == 1 && data.data) {
                 this.userList = data.data["list"];
+                this.pageCount = data.data["pageCount"];
+                this.count = data.data["count"];
                 console.log(data.data.list);
             }
             this.loading = false;
