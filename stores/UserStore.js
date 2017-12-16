@@ -76,10 +76,12 @@ class UserStore {
         return this.userModel && this.userModel.token != null;
     }
 
-    @action list(searchParams) {
+    @action list() {
         this.loading = true;
-        console.log(searchParams);
-        Fetch.post(API.api.user.list,searchParams).then((response) => {
+        console.log(this.searchParams);
+        this.searchParams["pageIndex"] = this.pageIndex;
+        this.searchParams["pageSize"] = 10;
+        Fetch.post(API.api.user.list,this.searchParams).then((response) => {
             let data = response.data;
             console.log(data);
             if (data.code == 1 && data.data) {
@@ -113,6 +115,21 @@ class UserStore {
             message.info(error.message);
             console.log(error);
             this.visible = false
+        });
+    }
+
+    // 新增用户
+    @action userDelete(params) {
+        this.addLoading = true;
+        console.log(params);
+        Fetch.post(API.api.user.delete,params).then((response) => {
+            let data = response.data;
+            console.log(data);
+            if (data.code == 1 && data.data) {
+                this.visible = false
+            }
+        }).catch((error) => {
+            this.addLoading = false;
         });
     }
 

@@ -90,7 +90,7 @@ const modal = ({
               filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
             >
              {roleStore.roleList.map(
-                (role, idx) => <Option value={role.name} rowKey={idx}>{role.name}</Option>
+                (role, idx) => <Option value={role.name} key={idx}>{role.name}</Option>
               )}
             </Select>
           )}

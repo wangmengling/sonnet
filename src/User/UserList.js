@@ -52,7 +52,7 @@ const param = (updateAction,deleteAction) => {
     width: 360,
     render: (text, record) => (
       <span>
-        <a title="update"  className="mgl10" onClick={deleteAction}> update </a>
+        <a title="update"  className="mgl10" onClick={updateAction}> 更改 </a>
         <span className="ant-divider" />
         <Popconfirm title="删除不可恢复，你确定要删除吗?" onConfirm={deleteAction} >  
             <a title="用户删除"  className="mgl10" >  
@@ -72,44 +72,17 @@ const title = () => 'Here is title';
 const showHeader = true;
 const scroll = { y: 240 };
 
-const filterProps = {
-  filter: {
-    ...location.query,
-  },
-  onFilterChange (value) {
-    // dispatch(routerRedux.push({
-    //   pathname: location.pathname,
-    //   query: {
-    //     ...value,
-    //     page: 1,
-    //     pageSize,
-    //   },
-    // }))
-  },
-  onSearch (fieldsValue) {
-    // fieldsValue.keyword.length ? dispatch(routerRedux.push({
-    //   pathname: '/user',
-    //   query: {
-    //     field: fieldsValue.field,
-    //     keyword: fieldsValue.keyword,
-    //   },
-    // })) : dispatch(routerRedux.push({
-    //   pathname: '/user',
-    // }))
-  },
-  // onAdd () {
-  //   // dispatch({
-  //   //   type: 'user/showModal',
-  //   //   payload: {
-  //   //     modalType: 'create',
-  //   //   },
-  //   // })
-  //   // this.setState({ visible: true });
-  // },
-  switchIsMotion () {
-    // dispatch({ type: 'user/switchIsMotion' })
-  },
-}
+// const filterProps = {
+//   filter: {
+//     ...location.query,
+//   },
+//   onFilterChange (value) {
+//     console.log(value);
+//   },
+//   onSearch (fieldsValue) {
+//     console.log(fieldsValue);
+//   },
+// }
 
 @observer
 class UserList extends Component {
@@ -131,7 +104,7 @@ class UserList extends Component {
     }
 
     componentWillMount() {
-      this.props.store.list({pageIndex:this.props.store.pageIndex});
+      this.props.store.list();
       this.props.roleStore.getRoleList();
     }
 
@@ -180,13 +153,29 @@ class UserList extends Component {
       console.log("asdfasdfasdfddd=====");
     }
 
+    filterProps = {
+      filter: {
+        ...location.query,
+      },
+      
+      onSearch (fieldsValue) {
+        // console.log(fieldsValue);
+      },
+    }
+
+    onFilterChange (value) {
+      // console.log(value);
+      this.props.store.searchParams["params"] = value;
+      this.props.store.list();
+    }
+
     render() {
       const state = this.state;
-      filterProps["onAdd"] = this.onAdd;
+      this.filterProps["onAdd"] = this.onAdd;
         return (
             <div>
                 <div className="userList-filter">
-                <Filter {...filterProps} />
+                <Filter {...this.filterProps} onFilterChange={this.onFilterChange.bind(this)}/>
                 </div>
                 {/* <Table columns={columns} dataSource={data} onChange={onChange} /> */}
                 <Table {...this.state} columns={param(this.updateAction,this.deleteAction)} dataSource={this.props.store.userList} />
