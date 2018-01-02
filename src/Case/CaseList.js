@@ -3,35 +3,8 @@ import Filter from "./Filter";
 import { withRouter } from "react-router-dom";
 import { Table, Icon, Switch, Radio, Form, Popconfirm} from 'antd';
 import { observer } from "mobx-react";
-import UserAdd from "./UserAdd";
 const FormItem = Form.Item;
-import  "./UserList.less";
-
-const columns = [{
-  title: '名字',
-  dataIndex: 'username',
-  key: 'username',
-  width: 150,
-  render: text => <a href="#">{text}</a>,
-},{
-  title: '角色',
-  dataIndex: 'role',
-  key: 'role',
-  width: 150,
-  render: text => <a href="#">{text}</a>,
-},  {
-  title: '操作',
-  key: 'action',
-  width: 360,
-  render: (text, record) => (
-    <span>
-      <a href="#">详情</a>
-      <span className="ant-divider" />
-      <a href="#">删除</a>
-      <span className="ant-divider" />
-    </span>
-  ),
-}];
+import  "./CaseList.less";
 
 const param = (updateAction,deleteAction) => {
   return [{
@@ -66,26 +39,12 @@ const param = (updateAction,deleteAction) => {
   }];
 };
 
-
-// const expandedRowRender = record => <p>{record.description}</p>;
 const title = () => 'Here is title';
 const showHeader = true;
 const scroll = { y: 240 };
 
-// const filterProps = {
-//   filter: {
-//     ...location.query,
-//   },
-//   onFilterChange (value) {
-//     console.log(value);
-//   },
-//   onSearch (fieldsValue) {
-//     console.log(fieldsValue);
-//   },
-// }
-
 @observer
-class UserList extends Component {
+class CaseList extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -106,7 +65,6 @@ class UserList extends Component {
 
     componentWillMount() {
       this.props.store.list();
-      this.props.roleStore.getRoleList();
     }
 
     handleToggle = (prop) => {
@@ -195,7 +153,7 @@ class UserList extends Component {
                 <Table  {...this.state} 
                 rowKey={record => record.registered}
                 columns={param(this.updateAction,this.deleteAction)} 
-                dataSource={this.props.store.userList} 
+                dataSource={this.props.store.caseList} 
                 pagination={{  //分页
                   total: store.count, //数据总数量
                   pageSize: store.pageSize,  //显示几条一页
@@ -212,16 +170,9 @@ class UserList extends Component {
                   }
                 }}
                 />
-                <UserAdd
-                  ref={this.saveFormRef}
-                  visible={this.props.store.visible}
-                  onCancel={this.handleCancel}
-                  onOk={this.handleCreate}
-                  roleStore={this.props.roleStore}
-                />
             </div>
         );
     }
 }
 
-export default withRouter(UserList);
+export default withRouter(CaseList);

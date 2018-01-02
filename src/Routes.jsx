@@ -14,6 +14,7 @@ import PrivateRoute from "../utils/PrivateRoute";
 import DashBoard from "./DashBoard/DashBoard"
 import UserList from "./User";
 import Role from "./Role";
+import CaseList from "./Case";
 const Routes = () => (
     <Router history={hashRouter}>
       <div>
@@ -25,6 +26,7 @@ const Routes = () => (
         <DefaultLayout exact path="/dashBoard" component={DashBoard}/>
         <DefaultLayout exact path="/user/list" component={UserList}/>
         <DefaultLayout exact path="/role/list" component={Role}/>
+        <DefaultLayout exact path="/case/list" component={CaseList}/>
       </div>
     </Router>
   )

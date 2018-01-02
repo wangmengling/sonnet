@@ -5,12 +5,12 @@ import API from "../config/API.config";
 import Fetch from "../utils/Fetch";
 import { message } from "antd";
 const JWT_SECRET = "sonnet";
-class UserStore {
+class CaseStore {
     /**
    * Observable properties.
-   * @property {map} userModel - User info.
+   * @property {map} caseModel - User info.
    */
-    @observable userModel = {};
+    @observable caseModel = {};
 
     @observable loading: boolean = false;
 
@@ -22,7 +22,7 @@ class UserStore {
     /**
      * UserList
      */
-    @observable userList = [];
+    @observable caseList = [];
     @observable searchParams = {};
     @observable pageIndex = 0;
     @observable pageCount = 0;
@@ -31,51 +31,7 @@ class UserStore {
    * @constructor
    */
     constructor (history) {
-        // super();
-        
-        // const token = Storage.get('token');
-        // if (token) {
-        //     this.userModel = jwt.verify(token, JWT_SECRET);
-        // }
         this.history = history;
-        this.userModel = localStorage.getItem("userModel");
-        // console.log(this.userModel);
-    }
-
-    @action login(userName,password) {
-        this.loading = true;
-        Fetch.post(API.api.user.login,{
-              username: userName,
-              password: password
-        }).then((response) => {
-            let data = response.data;
-            if (data.code == 1 && data.data) {
-                localStorage.setItem("token",data.data.token);
-                this.userModel = data.data;
-                localStorage.setItem("userModel",this.userModel);
-            }
-            this.loading = false;
-            message.info(data.message);
-        }).catch((error) => {
-            this.loading = false;
-            message.info(error.message);
-            console.log(error);
-        });
-    }
-
-    @action signOut() {
-        localStorage.removeItem("token");
-        this.userModel = {};
-    }
-
-    @computed get isLogin() {
-        // return localStorage.getItem("token") != null;
-        console.log(localStorage.getItem("token"));
-        return true;
-    }
-
-    @computed get loginCompleted() {
-        return this.userModel && this.userModel.token != null;
     }
 
     @action list() {
@@ -87,7 +43,7 @@ class UserStore {
             let data = response.data;
             console.log(data);
             if (data.code == 1 && data.data) {
-                this.userList = data.data["list"];
+                this.caseList = data.data["list"];
                 this.pageCount = data.data["pageCount"];
                 this.count = data.data["count"];
                 console.log(data.data.list);
@@ -101,7 +57,7 @@ class UserStore {
     }
 
     // 新增用户
-    @action userAdd(params) {
+    @action caseAdd(params) {
         this.addLoading = true;
         console.log(params);
         Fetch.post(API.api.user.add,params).then((response) => {
@@ -123,7 +79,7 @@ class UserStore {
     }
 
     // 新增用户
-    @action userDelete(params) {
+    @action caseDelete(params) {
         this.addLoading = true;
         console.log(params);
         Fetch.post(API.api.user.delete,params).then((response) => {
@@ -141,4 +97,4 @@ class UserStore {
         return this.addLoading;
     }
 }
-export default  new UserStore();
+export default  new CaseStore();
