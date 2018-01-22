@@ -60,14 +60,15 @@ class Sider extends React.Component {
           <Menu.Item key="5"><Link to="/role/list" >角色管理</Link></Menu.Item>
          <Menu.Item key="6"> <Link to="/user/list" >用户列表</Link></Menu.Item>
         </SubMenu>
-        <Menu.Item key="sub4">
-        <Link to="/case/list" >
-          <span>
-            <Icon type="setting" />
-            <span>案例</span>
-          </span>
-        </Link>
-        </Menu.Item>
+        <SubMenu key="sub4" title={<span><Icon type="setting" /><span>案例</span></span>}>
+          <Menu.Item key="8"> <Link to="/case/list" >案例列表</Link></Menu.Item>
+          <Menu.Item key="9"> <Link to="/case/add" >案例新增</Link></Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub5" title={<span><Icon type="setting" /><span>设置</span></span>}>
+          <Menu.Item key="10"><Link to="/caseCategory/list" >分类管理</Link></Menu.Item>
+          <Menu.Item key="11"> <Link to="/style/list" >风格</Link></Menu.Item>
+          <Menu.Item key="12"> <Link to="/color/list" >色系</Link></Menu.Item>
+        </SubMenu>
       </Menu>
     );
   }

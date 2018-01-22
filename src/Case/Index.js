@@ -1,9 +1,22 @@
 import React,{ Component } from "react";
 import CaseList from "./CaseList";
-
+import CaseAdd from "./CaseAdd";
 // import UserStore from "../../stores/UserStore";
-import {CaseStore} from "../../stores";
+import {CaseStore, StyleStore, ColorStore, UserStore} from "../../stores";
 
-export default () => (
+// export default () => (
+//   <CaseList store={CaseStore} />,
+// )
+
+var caseList = () => (
   <CaseList store={CaseStore} />
 )
+
+var caseAdd = () => (
+  <CaseAdd store={CaseStore} styleStore={StyleStore} colorStore={ColorStore} userStore={UserStore}/>
+)
+
+export {
+  caseAdd,
+  caseList
+}

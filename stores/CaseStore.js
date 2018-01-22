@@ -56,17 +56,15 @@ class CaseStore {
         });
     }
 
-    // 新增用户
-    @action caseAdd(params) {
+    // 新增
+    @action caseAddBase(params) {
         this.addLoading = true;
         console.log(params);
-        Fetch.post(API.api.user.add,params).then((response) => {
+        Fetch.post(API.api.case.addBase,params).then((response) => {
             let data = response.data;
             console.log(data);
             if (data.code == 1 && data.data) {
                 console.log(data.data);
-                this.visible = false
-                this.list();
             }
             message.info(data.message);
             this.addLoading = false;
@@ -74,7 +72,6 @@ class CaseStore {
             this.addLoading = false;
             message.info(error.message);
             console.log(error);
-            this.visible = false
         });
     }
 
