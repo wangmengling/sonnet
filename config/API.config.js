@@ -41,7 +41,7 @@ module.exports = {
             delete:`${APIV1}/color/delete`,
         },
         case: {
-            addBase: `${APIV1}/color/addBase`,
+            addBase: `${APIV1}/case/addBase`,
         }
     }
 }

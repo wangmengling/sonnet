@@ -1,59 +1,31 @@
-import React from "react";
-import { observable, computed, action, autorun } from "mobx";
-import { browserHistory } from 'react-router-dom';
-import API from "../config/API.config";
+import BaseStore from "./BaseStore";
 import Fetch from "../utils/Fetch";
 import { message } from "antd";
-const JWT_SECRET = "sonnet";
-class CaseStore {
-    /**
-   * Observable properties.
-   * @property {map} caseModel - User info.
-   */
-    @observable caseModel = {};
+import { observable, computed, action, autorun } from "mobx";
+import API from "../config/API.config";
+class CaseStore  extends BaseStore{
 
-    @observable loading: boolean = false;
+    @observable current = 0; //当前步骤
+    @observable isNext = false;
 
-    @observable addLoading: boolean = false;
-    @observable visible: boolean = false;
-
-    history = {};
-
-    /**
-     * UserList
-     */
-    @observable caseList = [];
-    @observable searchParams = {};
-    @observable pageIndex = 0;
-    @observable pageCount = 0;
-    @observable count = 0;
-    /**
-   * @constructor
-   */
-    constructor (history) {
-        this.history = history;
+    constructor() {
+        super();
     }
 
     @action list() {
-        this.loading = true;
-        console.log(this.searchParams);
-        this.searchParams["pageIndex"] = this.pageIndex;
-        this.searchParams["pageSize"] = this.pageSize;
-        Fetch.post(API.api.user.list,this.searchParams).then((response) => {
-            let data = response.data;
-            console.log(data);
-            if (data.code == 1 && data.data) {
-                this.caseList = data.data["list"];
-                this.pageCount = data.data["pageCount"];
-                this.count = data.data["count"];
-                console.log(data.data.list);
-            }
-            this.loading = false;
-        }).catch((error) => {
-            this.loading = false;
-            message.info(error.message);
-            console.log(error);
-        });
+        super.list(API.api.caseCategory.list);
+    }
+
+    @action add(name) {
+        super.add(API.api.caseCategory.add,{name:name});
+    }
+
+    @action update(name,_id) {
+        super.update(API.api.caseCategory.update,{_id:_id,name:name});
+    }
+
+    @action delete(_id) {
+        super.delete(API.api.caseCategory.delete,{_id:_id});
     }
 
     // 新增
@@ -62,11 +34,11 @@ class CaseStore {
         console.log(params);
         Fetch.post(API.api.case.addBase,params).then((response) => {
             let data = response.data;
-            console.log(data);
             if (data.code == 1 && data.data) {
-                console.log(data.data);
+                this.detailData = data.data;
+                this.current = 1;
             }
-            message.info(data.message);
+            // message.info(data.message);
             this.addLoading = false;
         }).catch((error) => {
             this.addLoading = false;
@@ -75,23 +47,8 @@ class CaseStore {
         });
     }
 
-    // 新增用户
-    @action caseDelete(params) {
-        this.addLoading = true;
-        console.log(params);
-        Fetch.post(API.api.user.delete,params).then((response) => {
-            let data = response.data;
-            console.log(data);
-            if (data.code == 1 && data.data) {
-                this.visible = false
-            }
-        }).catch((error) => {
-            this.addLoading = false;
-        });
-    }
-
-    @computed get getAddLoading() {
-        return this.addLoading;
+    @computed get getCurrent() {
+        return this.current;
     }
 }
 export default  new CaseStore();

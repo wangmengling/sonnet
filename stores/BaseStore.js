@@ -120,5 +120,9 @@ class BaseStore {
             message.info(error.message);
         });
     }
+
+    @computed get getAddLoading() {
+        return this.addLoading;
+    }
 }
 export default BaseStore;

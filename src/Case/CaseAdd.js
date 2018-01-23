@@ -26,24 +26,32 @@ class CaseAdd extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            current: 0,
             loading:false
         };
     }
 
     
     next() {
-        const current = this.state.current + 1;
-        this.setState({ current });
+        // this.props.store.current = this.props.store.current + 1;
+        this.props.store.isNext = true;
+        console.log(this.props.store.current);
+        // this.refs.form.validateFields((err, values) => {
+        //     this.props.onSubmit(err, values)
+        //     if (!err) {
+        //         // this.hideModelHandler()
+        //     }
+        // });
+        // this.refs.form.submit();
+        
     }
 
     prev() {
-        const current = this.state.current - 1;
-        this.setState({ current });
+        const current = this.props.store.current - 1;
+        this.props.store.current = current;
     }
 
     render() {
-        const {current} = this.state;
+        const current = this.props.store.current;
         return (
             <div className="CaseAddContent">
             <Steps current={current}>
@@ -51,17 +59,23 @@ class CaseAdd extends Component {
             </Steps>
             <div className="steps-content">
             {
-                    this.state.current == 0
+                    current == 0
                     &&
-                    <CaseAddBase store={this.props.store} styleStore={this.props.styleStore} colorStore={this.props.colorStore} userStore={this.props.userStore}/>
+                    <CaseAddBase 
+                        store={this.props.store} 
+                        styleStore={this.props.styleStore} 
+                        colorStore={this.props.colorStore} 
+                        userStore={this.props.userStore}
+                        
+                    />
                 }
                 {
-                    this.state.current ==  1
+                    current ==  1
                     &&
                     <CaseAddImage />
                 }
                 {
-                    this.state.current == 2
+                    current == 2
                     &&
                     <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
                     Previous
@@ -70,17 +84,17 @@ class CaseAdd extends Component {
             </div>
             <div className="steps-action">
                 {
-                    this.state.current < steps.length - 1
+                    current < steps.length - 1
                     &&
                     <Button type="primary" onClick={() => this.next()}>下一步</Button>
                 }
                 {
-                    this.state.current === steps.length - 1
+                    current === steps.length - 1
                     &&
                     <Button type="primary" onClick={() => message.success('Processing complete!')}>完成</Button>
                 }
                 {
-                    this.state.current > 0
+                    current > 0
                     &&
                     <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
                     前一步

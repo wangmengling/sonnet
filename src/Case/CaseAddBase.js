@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { observer } from "mobx-react";
+import { autorun } from "mobx";
+import PropTypes from 'prop-types'
 import "./CaseAddBase.less";
 import {Form, Input, Tooltip, Icon, Checkbox, Select, Row, Col, Upload, Button, AutoComplete, DatePicker } from 'antd';
 const FormItem = Form.Item;
@@ -61,6 +63,8 @@ class CaseAddBaseForm extends Component {
             imageUrl:"",
             loading:false
         };
+
+        
     }
 
     componentWillMount() {
@@ -74,10 +78,13 @@ class CaseAddBaseForm extends Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+                // this.props.store.current = 1;
+                this.props.store.caseAddBase(values);
             }
+            console.log(values);
         });
     }
-    
+
     handleConfirmBlur = (e) => {
         const value = e.target.value;
         this.setState({ confirmDirty: this.state.confirmDirty || !!value });
@@ -93,6 +100,7 @@ class CaseAddBaseForm extends Component {
     }
 
     checkConfirm = (rule, value, callback) => {
+        console.log(value);
         const form = this.props.form;
         if (value && this.state.confirmDirty) {
             form.validateFields(['confirm'], { force: true });
@@ -174,11 +182,23 @@ class CaseAddBaseForm extends Component {
           );
         const imageUrl = this.state.imageUrl;
 
-        
-
+        autorun(() => {
+            if (this.props.store.getCurrent == 0 && this.props.store.isNext == true) {
+                // document.getElementById("CaseAddBaseForm").submit();
+                // this.document.forms['CaseAddBaseForm'].submit();
+                // this.refs.CaseAddBaseForm.onSubmit;
+                // this.props.form.validateFields((err, values) => {
+                //         this.props.onSubmit(err, values)
+                //         // if (!err) {
+                //         //     // this.hideModelHandler()
+                //         // }
+                // });
+                // this.props.form.submit();
+            }
+        });
         return (
             <div className="CaseAddBaseContent">
-                <Form className="CaseAddBaseForm" onSubmit={this.handleSubmit}>
+                <Form className="CaseAddBaseForm"  ref="form"  name="CaseAddBaseForm" id="CaseAddBaseForm" onSubmit={this.handleSubmit}>
                     <FormItem
                         {...formItemLayout}
                         label={(
@@ -191,9 +211,8 @@ class CaseAddBaseForm extends Component {
                         )}
                     >
                         {getFieldDecorator('title', {
-                            rules: [{
-                                type: 'title', message: 'The input is not valid Title!',
-                            }, {
+                            rules: [
+                            {
                                 required: true, message: 'Please input your Title!',
                             }],
                         })(
@@ -260,9 +279,11 @@ class CaseAddBaseForm extends Component {
                         )}
                     >
                         {getFieldDecorator('address', {
-                            rules: [{
-                                type: 'title', message: 'The input is not valid Title!',
-                            }, {
+                            rules: [
+                            //     {
+                            //     type: 'title', message: 'The input is not valid Title!',
+                            // },
+                             {
                                 required: true, message: 'Please input your Title!',
                             }],
                         })(
@@ -316,9 +337,9 @@ class CaseAddBaseForm extends Component {
                         )}
                     </div>
                     </FormItem> */}
-                    {/* <FormItem {...tailFormItemLayout}>
+                    <FormItem {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">Register</Button>
-                    </FormItem> */}
+                    </FormItem>
                 </Form>    
             </div>
         );
