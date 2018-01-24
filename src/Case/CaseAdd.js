@@ -5,6 +5,7 @@ import "./CaseAdd.less";
 import { Steps,Form, Input, Tooltip, Icon, Checkbox, Select, Row, Col, Upload, Button, AutoComplete, DatePicker } from 'antd';
 import CaseAddBase from "./CaseAddBase";
 import CaseAddImage from "./CaseAddImage";
+import CaseAddThumbAndVideo from "./CaseAddThumbAndVideo";
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
@@ -72,14 +73,12 @@ class CaseAdd extends Component {
                 {
                     current ==  1
                     &&
-                    <CaseAddImage />
+                    <CaseAddThumbAndVideo />
                 }
                 {
                     current == 2
                     &&
-                    <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
-                    Previous
-                    </Button>
+                    <CaseAddImage />
                 }
             </div>
             <div className="steps-action">

@@ -73,6 +73,7 @@ class CaseAddBaseForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
+            this.props.store.current = 1;
             if (!err) {
                 console.log('Received values of form: ', values);
                 // this.props.store.current = 1;
