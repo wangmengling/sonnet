@@ -60,11 +60,8 @@ class CaseAddBaseForm extends Component {
         this.state = {
             confirmDirty: false,
             autoCompleteResult: [],
-            imageUrl:"",
             loading:false
-        };
-
-        
+        }; 
     }
 
     componentWillMount() {
@@ -85,52 +82,30 @@ class CaseAddBaseForm extends Component {
         });
     }
 
-    handleConfirmBlur = (e) => {
-        const value = e.target.value;
-        this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-    }
+    // handleConfirmBlur = (e) => {
+    //     const value = e.target.value;
+    //     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+    // }
 
-    checkPassword = (rule, value, callback) => {
-        const form = this.props.form;
-        if (value && value !== form.getFieldValue('password')) {
-            callback('Two passwords that you enter is inconsistent!');
-        } else {
-            callback();
-        }
-    }
+    // checkPassword = (rule, value, callback) => {
+    //     const form = this.props.form;
+    //     if (value && value !== form.getFieldValue('password')) {
+    //         callback('Two passwords that you enter is inconsistent!');
+    //     } else {
+    //         callback();
+    //     }
+    // }
 
-    checkConfirm = (rule, value, callback) => {
-        console.log(value);
-        const form = this.props.form;
-        if (value && this.state.confirmDirty) {
-            form.validateFields(['confirm'], { force: true });
-        }
-        callback();
-    }
+    // checkConfirm = (rule, value, callback) => {
+    //     console.log(value);
+    //     const form = this.props.form;
+    //     if (value && this.state.confirmDirty) {
+    //         form.validateFields(['confirm'], { force: true });
+    //     }
+    //     callback();
+    // }
 
-    handleWebsiteChange = (value) => {
-        let autoCompleteResult;
-        if (!value) {
-            autoCompleteResult = [];
-        } else {
-            autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
-        }
-        this.setState({ autoCompleteResult });
-    }
-
-    uploadImage = (info) => {
-        if (info.file.status === 'uploading') {
-          this.setState({ loading: true });
-          return;
-        }
-        if (info.file.status === 'done') {
-          // Get this url from response in real world.
-          getBase64(info.file.originFileObj, imageUrl => this.setState({
-            imageUrl,
-            loading: false,
-          }));
-        }
-    }
+    
 
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -170,30 +145,10 @@ class CaseAddBaseForm extends Component {
             </Select>
             );
 
-        const websiteOptions = autoCompleteResult.map(website => (
-            <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-        ));
-
-        const uploadButton = (
-            <div>
-              <Icon type={this.state.loading ? 'loading' : 'plus'} />
-              <div className="ant-upload-text">Upload</div>
-            </div>
-          );
-        const imageUrl = this.state.imageUrl;
 
         autorun(() => {
             if (this.props.store.getCurrent == 0 && this.props.store.isNext == true) {
-                // document.getElementById("CaseAddBaseForm").submit();
-                // this.document.forms['CaseAddBaseForm'].submit();
-                // this.refs.CaseAddBaseForm.onSubmit;
-                // this.props.form.validateFields((err, values) => {
-                //         this.props.onSubmit(err, values)
-                //         // if (!err) {
-                //         //     // this.hideModelHandler()
-                //         // }
-                // });
-                // this.props.form.submit();
+                
             }
         });
         return (
@@ -307,38 +262,8 @@ class CaseAddBaseForm extends Component {
                             </Select>
                             )}
                     </FormItem>
-                    {/* <FormItem
-                    {...formItemLayout}
-                    label="图片"
-                    >
-                    <div className="dropbox">
-                        {getFieldDecorator('image', {
-                        valuePropName: 'fileList',
-                        getValueFromEvent: this.normFile,
-                        })(
-                        // <Upload.Dragger name="files" action="/upload.do">
-                        //     <p className="ant-upload-drag-icon">
-                        //     <Icon type="inbox" />
-                        //     </p>
-                        //     <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                        //     <p className="ant-upload-hint">Support for a single or bulk upload.</p>
-                        // </Upload.Dragger>
-                        <Upload
-                            name="image"
-                            listType="picture-card"
-                            className="avatar-uploader"
-                            showUploadList={false}
-                            action="//jsonplaceholder.typicode.com/posts/"
-                            beforeUpload={beforeUpload}
-                            onChange={this.uploadImage}
-                        >
-                            {imageUrl ? <img src={imageUrl} alt="" /> : uploadButton}
-                        </Upload>
-                        )}
-                    </div>
-                    </FormItem> */}
                     <FormItem {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit">Register</Button>
+                        <Button type="primary" htmlType="submit" loading={this.props.store.addLoading}>新增</Button>
                     </FormItem>
                 </Form>    
             </div>
