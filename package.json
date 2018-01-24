@@ -25,6 +25,8 @@
     "react": "^16.1.1",
     "react-cropper": "^1.0.1",
     "react-dom": "^16.1.1",
+    "react-media-player": "^0.7.0",
+    "react-motion-ui-pack": "^0.10.3",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2"
   },

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { observer } from "mobx-react";
+import  './CaseAddThumbAndVideo.less'
+import VideoPlayer from '../components/MediaPlayer/VideoPlayer'
 import {
     Form, InputNumber,
     Slider, Button, Upload, Icon, Rate,
@@ -118,23 +120,31 @@ class CaseAddThumbAndVideoForm extends Component {
                             valuePropName: 'fileList',
                             getValueFromEvent: this.normFile,
                         })(
-                            // <Upload name="logo" action="/upload.do" listType="picture">
-                            //     <Button>
-                            //         <Icon type="upload" /> Click to upload
-                            //     </Button>
-                            // </Upload>
-                            <Upload
-                                name="avatar"
-                                listType="picture-card"
-                                className="avatar-uploader"
-                                showUploadList={false}
-                                action="//jsonplaceholder.typicode.com/posts/"
-                                beforeUpload={beforeUpload}
-                                onChange={this.handleChange}
+                            <div>
+                            <Upload.Dragger 
+                            name="files" 
+                            action="/upload.do"
+                            showUploadList={false}
+                            beforeUpload={beforeUpload}
+                            onChange={this.handleChange}
                             >
-                                {uploadButton}
-                                {/* {imageUrl ? <img src={imageUrl} alt="" /> : uploadButton} */}
-                            </Upload>
+                                    <p className="ant-upload-drag-icon">
+                                        <Icon type="inbox" />
+                                    </p>
+                                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                                    <p className="ant-upload-hint">Support for a single or bulk upload.</p>
+                                    {/* <img src={imageUrl} className="previewImage" alt="" /> */}
+                                    
+                            </Upload.Dragger>
+                            <Cropper
+                            ref='cropper'
+                            src={imageUrl}
+                            style={{height: 400, width: '100%'}}
+                            // Cropper.js options
+                            aspectRatio={16 / 9}
+                            guides={false}
+                            crop={this._crop.bind(this)} />
+                            </div>
                             )}
                     </FormItem>
 
@@ -147,6 +157,7 @@ class CaseAddThumbAndVideoForm extends Component {
                                 valuePropName: 'fileList',
                                 getValueFromEvent: this.normFile,
                             })(
+                                <div>
                                 <Upload.Dragger name="files" action="/upload.do">
                                     <p className="ant-upload-drag-icon">
                                         <Icon type="inbox" />
@@ -154,6 +165,9 @@ class CaseAddThumbAndVideoForm extends Component {
                                     <p className="ant-upload-text">Click or drag file to this area to upload</p>
                                     <p className="ant-upload-hint">Support for a single or bulk upload.</p>
                                 </Upload.Dragger>
+                                
+                                
+                                </div>
                                 )}
                         </div>
                     </FormItem>
@@ -164,7 +178,7 @@ class CaseAddThumbAndVideoForm extends Component {
                         <Button type="primary" htmlType="submit">Submit</Button>
                     </FormItem>
                 </Form>
-
+                <VideoPlayer src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" autoPlay={false} />
                 {/* <Cropper
                     ref='cropper'
                     src='http://roadmanfong.github.io/react-cropper/example/img/child.jpg'
