@@ -4,11 +4,13 @@ import CaseStore from "./CaseStore";
 import CaseCategoryStore from "./CaseCategoryStore";
 import StyleStore from "./StyleStore";
 import ColorStore from "./ColorStore";
+import UploadStore from "./UploadStore";
 export {
     UserStore,
     RoleStore,
     CaseStore,
     CaseCategoryStore,
     StyleStore,
-    ColorStore
+    ColorStore,
+    UploadStore
 }

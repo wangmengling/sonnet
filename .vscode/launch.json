@@ -1,0 +1,41 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "启动一个调试模式的 Chrome",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "attach",
+            "name": "监听一个已经启动调试模式的 Chrome",
+            "port": 9222,
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${workspaceRoot}/node_modules/babel-cli/bin/babel-node.js",
+            "args": [
+                "${workspaceRoot}/bin/www"
+            ]
+        }
+        ,
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "附加于已启动的 Node 服务器（inspect模式）",
+            "port": 9230,
+            "restart": true
+        },
+
+    ]
+}

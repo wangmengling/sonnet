@@ -6,6 +6,7 @@
     "antd": "^2.13.10",
     "axios": "^0.17.1",
     "babel-preset-stage-1": "^6.24.1",
+    "classnames": "^2.2.5",
     "css-loader": "^0.28.7",
     "debug": "^2.6.3",
     "koa": "^2.2.0",
@@ -64,6 +65,7 @@
     "start": "node bin/www",
     "dev": "./node_modules/.bin/nodemon  bin/www  --exec babel-node",
     "prd": "pm2 start bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "inspect": "nodemon --inspect-brk=9230  bin/www  --exec babel-node"
   }
 }

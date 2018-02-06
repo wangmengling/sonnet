@@ -73,7 +73,7 @@ class CaseAdd extends Component {
                 {
                     current ==  1
                     &&
-                    <CaseAddThumbAndVideo />
+                    <CaseAddThumbAndVideo uploadStore={this.props.uploadStore}/>
                 }
                 {
                     current == 2

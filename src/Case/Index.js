@@ -2,7 +2,7 @@ import React,{ Component } from "react";
 import CaseList from "./CaseList";
 import CaseAdd from "./CaseAdd";
 // import UserStore from "../../stores/UserStore";
-import {CaseStore, StyleStore, ColorStore, UserStore} from "../../stores";
+import {CaseStore, StyleStore, ColorStore, UserStore, UploadStore} from "../../stores";
 
 // export default () => (
 //   <CaseList store={CaseStore} />,
@@ -13,7 +13,7 @@ var caseList = () => (
 )
 
 var caseAdd = () => (
-  <CaseAdd store={CaseStore} styleStore={StyleStore} colorStore={ColorStore} userStore={UserStore}/>
+  <CaseAdd store={CaseStore} styleStore={StyleStore} colorStore={ColorStore} userStore={UserStore} uploadStore={UploadStore}/>
 )
 
 export {
