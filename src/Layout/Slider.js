@@ -54,7 +54,7 @@ class Slider extends React.Component {
     return (
       <Menu
         mode="inline"
-        openKeys={this.state.openKeys}
+        // openKeys={this.state.openKeys}
         selectedKeys={[PublicStore.sliderSelectCurrent]}
         style={{height: '100vh'}}
         onOpenChange={this.onOpenChange}

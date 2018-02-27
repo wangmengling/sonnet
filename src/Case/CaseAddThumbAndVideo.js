@@ -14,6 +14,7 @@ const FormItem = Form.Item;
 
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
+import UploadStore from "../../stores/UploadStore";
 const Dragger = Upload.Dragger;
 
 function getBase64(img, callback) {
@@ -38,7 +39,6 @@ class CaseAddThumbAndVideoForm extends Component {
 
     _crop() {
         // image in dataUrl
-        console.log("ddddddd");
         console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
     }
     //上传视频
@@ -63,7 +63,6 @@ class CaseAddThumbAndVideoForm extends Component {
 
     ssubmit = (e) => {
         var form = document.getElementById("fileinfo");
-        console.log(form);
         var fd = new FormData(form);
     }
 
@@ -79,13 +78,11 @@ class CaseAddThumbAndVideoForm extends Component {
     handleThumbSubmit() {
         let formData = new FormData();
         formData.append('thumb' ,this.state.imgFile);
-        console.log(this.props.store.detailData._id);
         formData.append('_id' ,this.props.store.detailData._id);
         this.props.uploadStore.uploadThumb(formData);
     }
 
     normFile = (e) => {
-        console.log('Upload event:', e);
         if (Array.isArray(e)) {
             return e;
         }
@@ -100,7 +97,6 @@ class CaseAddThumbAndVideoForm extends Component {
         }
         if (info.file.status === 'done') {
             // Get this url from response in real world.
-            console.log(info.file);
             getBase64(info.file.originFileObj, videoUrl => this.setState({
                 videoUrl,
                 loading: false,
@@ -136,7 +132,6 @@ class CaseAddThumbAndVideoForm extends Component {
         }
         if (info.file.status === 'done') {
             // Get this url from response in real world.
-            console.log(info.file);
             getBase64(info.file.originFileObj, imageUrl => this.setState({
                 imageUrl,
                 loading: false,
@@ -164,7 +159,6 @@ class CaseAddThumbAndVideoForm extends Component {
     }
 
     cropImage() {
-        console.log(this.state.cropStatus);
         if (this.state.cropStatus) {
             if (typeof this.refs.cropper.getCroppedCanvas() === 'undefined') {
                 return;
@@ -179,7 +173,12 @@ class CaseAddThumbAndVideoForm extends Component {
     }
 
     render() {
-        
+        // var disposer = autorun(()=> {
+        //     console.log(this.props.uploadStore.isUploadDone.get());
+        //     if (this.props.uploadStore.isUploadDone.get()) {
+        //         this.props.store.current = 2;
+        //     }
+        // })
         const props = {
             name: 'file',
             multiple: true,
@@ -187,7 +186,7 @@ class CaseAddThumbAndVideoForm extends Component {
             onChange(info) {
                 const status = info.file.status;
                 if (status !== 'uploading') {
-                    console.log(info.file, info.fileList);
+                    // console.log(info.file, info.fileList);
                 }
                 if (status === 'done') {
                     message.success(`${info.file.name} file uploaded successfully.`);

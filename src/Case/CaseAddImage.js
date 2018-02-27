@@ -11,7 +11,7 @@ class CaseAddImageForm extends Component {
         
         return (
           <div className="clearfix">
-            <PicturesWall />
+            <PicturesWall store={this.props.store}/>
           </div>
         );
       }

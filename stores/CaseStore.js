@@ -38,7 +38,23 @@ class CaseStore  extends BaseStore{
                 this.detailData = data.data;
                 this.current = 1;
             }
-            // message.info(data.message);
+            this.addLoading = false;
+        }).catch((error) => {
+            this.addLoading = false;
+            message.info(error.message);
+            console.log(error);
+        });
+    }
+
+    // 新增
+    @action updateImageUrl(params) {
+        this.addLoading = true;
+        Fetch.post(API.api.case.updateImageUrl,params).then((response) => {
+            let data = response.data;
+            if (data.code == 1 && data.data) {
+                this.detailData = data.data;
+                this.current = 3;
+            }
             this.addLoading = false;
         }).catch((error) => {
             this.addLoading = false;

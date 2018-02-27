@@ -15,10 +15,10 @@ const steps = [{
     title: '基础信息',
     content: 'First-content',
   }, {
-    title: '图片',
+    title: '缩略图',
     content: 'Second-content',
   }, {
-    title: '完成',
+    title: '图片',
     content: 'Last-content',
   }];
 

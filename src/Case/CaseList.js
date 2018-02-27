@@ -1,7 +1,7 @@
 import React,{ Component  } from "react";
 import Filter from "./Filter";
 import { withRouter } from "react-router-dom";
-import { Table, Icon, Switch, Radio, Form, Popconfirm} from 'antd';
+import { Table, Icon, Switch, Radio, Form, Popconfirm, List, Card} from 'antd';
 import { observer } from "mobx-react";
 const FormItem = Form.Item;
 import  "./CaseList.less";
@@ -150,7 +150,7 @@ class CaseList extends Component {
                 <Filter {...this.filterProps} onFilterChange={this.onFilterChange.bind(this)}/>
                 </div>
                 {/* <Table columns={columns} dataSource={data} onChange={onChange} /> */}
-                <Table  {...this.state} 
+                {/* <Table  {...this.state} 
                 rowKey={record => record.registered}
                 columns={param(this.updateAction,this.deleteAction)} 
                 dataSource={this.props.store.caseList} 
@@ -169,7 +169,14 @@ class CaseList extends Component {
                       return '共 ' + store.count + ' 条数据'; 
                   }
                 }}
-                />
+                /> */}
+                <List
+                  dataSource={this.props.store.caseList} 
+                  itemLayout="vertical"
+                  pageStart = {0}
+                >
+                  
+                </List>
             </div>
         );
     }

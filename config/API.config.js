@@ -42,6 +42,7 @@ module.exports = {
         },
         case: {
             addBase: `${APIV1}/case/addBase`,
+            updateImageUrl: `${APIV1}/case/updateImageUrl`,
         },
         upload: {
             video: `${APIV1}/upload/video`,
