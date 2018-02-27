@@ -1,23 +1,22 @@
-import React,{ Component } from "react";
+'use strict';
+import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import {Form, Input, Tooltip, Icon, Checkbox, Select, Row, Col, Upload, Button, AutoComplete, DatePicker } from 'antd';
+import {Form, Upload, Icon, Modal } from 'antd';
+import PicturesWall from "../components/PicturesWall/PicturesWall";
 const FormItem = Form.Item;
 
 class CaseAddImageForm extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
+    
+      render() {
+        
         return (
-            <div>
-                 <Form className="CaseAddBaseForm" onSubmit={this.handleSubmit}>
-                 </Form>
-            </div>
-        )
-    }
+          <div className="clearfix">
+            <PicturesWall />
+          </div>
+        );
+      }
 }
 
-const CaseAddImage = Form.create()(CaseAddImageForm);
-export default withRouter(CaseAddImage);
+// const CaseAddImage = Form.create()(CaseAddImageForm);
+export default withRouter(CaseAddImageForm);
 

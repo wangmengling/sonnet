@@ -7,7 +7,7 @@ import  './Header.less'
 
 const SubMenu = Menu.SubMenu
 
-const Header = ({ user, logout, switchSider, siderFold, isNavbar, menuPopoverVisible, location, switchMenuPopover, navOpenKeys, changeOpenKeys, menu }) => {
+const HeaderView = ({ user, logout, switchSider, siderFold, isNavbar, menuPopoverVisible, location, switchMenuPopover, navOpenKeys, changeOpenKeys, menu }) => {
   let handleClickMenu = e => e.key === 'logout' && logout()
   const menusProps = {
     menu,
@@ -35,9 +35,9 @@ const Header = ({ user, logout, switchSider, siderFold, isNavbar, menuPopoverVis
           <Icon type={classnames({ 'menu-unfold': siderFold, 'menu-fold': !siderFold })} />
         </div>}
       <div className='header-rightWarpper'>
-        <div className='header-button'>
+        {/* <div className='header-button'>
           <Icon type="mail" />
-        </div>
+        </div> */}
         <Menu mode="horizontal" onClick={handleClickMenu}>
            <SubMenu
             style={{
@@ -48,7 +48,7 @@ const Header = ({ user, logout, switchSider, siderFold, isNavbar, menuPopoverVis
               {user.username}
             </span>}
           >
-            <Menu.Item key="logout" >
+            <Menu.Item key="logout">
               Sign out
             </Menu.Item>
           </SubMenu>
@@ -58,7 +58,7 @@ const Header = ({ user, logout, switchSider, siderFold, isNavbar, menuPopoverVis
   )
 }
 
-Header.propTypes = {
+HeaderView.propTypes = {
   menu: PropTypes.array,
   user: PropTypes.object,
   logout: PropTypes.func,
@@ -72,4 +72,4 @@ Header.propTypes = {
   changeOpenKeys: PropTypes.func,
 }
 
-export default Header
+export default HeaderView

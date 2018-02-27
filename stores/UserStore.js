@@ -1,8 +1,8 @@
 import React from "react";
 import { observable, computed, action, autorun } from "mobx";
-import { browserHistory } from 'react-router-dom';
 import API from "../config/API.config";
 import Fetch from "../utils/Fetch";
+import history from "../src/History";
 import { message } from "antd";
 const JWT_SECRET = "sonnet";
 class UserStore {
@@ -30,16 +30,23 @@ class UserStore {
     /**
    * @constructor
    */
-    constructor (history) {
-        // super();
+    // constructor (history) {
+    //     // super();
         
-        // const token = Storage.get('token');
-        // if (token) {
-        //     this.userModel = jwt.verify(token, JWT_SECRET);
-        // }
-        this.history = history;
-        this.userModel = localStorage.getItem("userModel");
-        // console.log(this.userModel);
+    //     // const token = Storage.get('token');
+    //     // if (token) {
+    //     //     this.userModel = jwt.verify(token, JWT_SECRET);
+    //     // }
+    //     this.history = history;
+    //     this.userModel = localStorage.getItem("userModel");
+    //     // console.log(this.userModel);
+    // }
+
+    /**
+     * @constructor
+     */
+    constructor () {
+        this.userModel = {};
     }
 
     @action login(userName,password) {
@@ -52,7 +59,7 @@ class UserStore {
             if (data.code == 1 && data.data) {
                 localStorage.setItem("token",data.data.token);
                 this.userModel = data.data;
-                localStorage.setItem("userModel",this.userModel);
+                localStorage.setItem("loginUserBaseInfo",this.userModel);
             }
             this.loading = false;
             message.info(data.message);
@@ -63,18 +70,22 @@ class UserStore {
         });
     }
 
-    @action signOut() {
-        localStorage.removeItem("token");
+     @action signOut() {
         this.userModel = {};
+        localStorage.removeItem("token");
+        localStorage.removeItem("loginUserBaseInfo");
+        message.info("退出登录成功");
+        setTimeout(() => {
+            history.push('/login',{some:"state"})
+        }, 1000);
     }
 
     @computed get isLogin() {
-        // return localStorage.getItem("token") != null;
-        console.log(localStorage.getItem("token"));
-        return true;
+        return localStorage.getItem("token") != null;
     }
 
     @computed get loginCompleted() {
+        console.log(this.userModel);
         return this.userModel && this.userModel.token != null;
     }
 

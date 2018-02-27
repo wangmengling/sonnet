@@ -46,6 +46,7 @@ module.exports = {
         upload: {
             video: `${APIV1}/upload/video`,
             thumb: `${APIV1}/upload/thumb`,
+            image: `${APIV1}/upload/image`,
         }
     }
 }

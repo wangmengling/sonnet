@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { autorun } from "mobx";
 import { observer } from "mobx-react";
 import './CaseAddThumbAndVideo.less'
+
 import VideoPlayer from '../components/MediaPlayer/VideoPlayer'
 import {
     Form, InputNumber,
@@ -53,15 +55,23 @@ class CaseAddThumbAndVideoForm extends Component {
                 // formData.append('filedata'+index ,this.state.videoFile);
                 // console.log('fileDDD',formData.get('filedata').type);
             // }
-            // this.handleVideoSubmit();
+            this.handleVideoSubmit();
             this.handleThumbSubmit();
+            // this.props.store.current = 2;
         });
+    }
+
+    ssubmit = (e) => {
+        var form = document.getElementById("fileinfo");
+        console.log(form);
+        var fd = new FormData(form);
     }
 
     //上传视频
     handleVideoSubmit() {
         let formData = new FormData();
         formData.append('video' ,this.state.videoFile);
+        formData.append('_id' ,this.props.store.detailData._id);
         this.props.uploadStore.uploadVideo(formData);
     }
 
@@ -69,9 +79,8 @@ class CaseAddThumbAndVideoForm extends Component {
     handleThumbSubmit() {
         let formData = new FormData();
         formData.append('thumb' ,this.state.imgFile);
-        console.log(this.state.imageUrl);
-        console.log(this.state.imgFile);
-        console.log(formData.getAll('thumb')); // ["sean", "will"]
+        console.log(this.props.store.detailData._id);
+        formData.append('_id' ,this.props.store.detailData._id);
         this.props.uploadStore.uploadThumb(formData);
     }
 
@@ -170,6 +179,7 @@ class CaseAddThumbAndVideoForm extends Component {
     }
 
     render() {
+        
         const props = {
             name: 'file',
             multiple: true,

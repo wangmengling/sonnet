@@ -1,10 +1,12 @@
 import React from 'react'
 import {
-  BrowserRouter as Router,
+  Router,
+  // BrowserRouter as Router,
   Route,
   Link,
   hashRouter
 } from 'react-router-dom'
+import history from "./History";
 import App from './App';
 import About from './About';
 import Login from './Login/Index';
@@ -19,9 +21,14 @@ import CaseCategoryList from "./CaseCategory"
 import ColorList from "./Color";
 import StyleList from "./Style";
 
-// import CaseAdd from "./Case/CaseAdd";
+import CaseAdd from "./Case/CaseAdd";
+const location = history.location;
+const unlisten = history.listen((location,action) => {
+  console.log(action,location.pathname,location.state);
+})
 const Routes = () => (
-    <Router history={hashRouter}>
+    // <Router history={hashRouter}>
+    <Router history={history}> 
       <div>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/" component={App}/>
