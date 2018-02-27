@@ -6,6 +6,27 @@ import { observer } from "mobx-react";
 const FormItem = Form.Item;
 import  "./CaseList.less";
 
+const data = [
+  {
+    title: 'Title 1',
+  },
+  {
+    title: 'Title 2',
+  },
+  {
+    title: 'Title 3',
+  },
+  {
+    title: 'Title 4',
+  },
+  {
+    title: 'Title 5',
+  },
+  {
+    title: 'Title 6',
+  },
+];
+
 const param = (updateAction,deleteAction) => {
   return [{
     title: '名字',
@@ -171,12 +192,14 @@ class CaseList extends Component {
                 }}
                 /> */}
                 <List
-                  dataSource={this.props.store.caseList} 
-                  itemLayout="vertical"
-                  pageStart = {0}
-                >
-                  
-                </List>
+                  grid={{ gutter: 16, column: 3 }}
+                  dataSource={data}
+                  renderItem={item => (
+                    <List.Item>
+                      <Card title={item.title}>Card content</Card>
+                    </List.Item>
+                  )}
+                />
             </div>
         );
     }
