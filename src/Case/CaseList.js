@@ -196,7 +196,9 @@ class CaseList extends Component {
                   dataSource={data}
                   renderItem={item => (
                     <List.Item>
-                      <Card title={item.title}>Card content</Card>
+                      <Card title={item.title}>
+                        <img src="http://f.hiphotos.baidu.com/image/pic/item/503d269759ee3d6db032f61b48166d224e4ade6e.jpg" />
+                      </Card>
                     </List.Item>
                   )}
                 />
