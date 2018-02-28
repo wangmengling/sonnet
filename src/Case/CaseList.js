@@ -2,7 +2,8 @@ import React,{ Component  } from "react";
 import Filter from "./Filter";
 import API from "../../config/API.config";
 import { withRouter } from "react-router-dom";
-import { Table, Icon, Switch, Radio, Form, Popconfirm, List, Card} from 'antd';
+import InfiniteScroll from 'react-infinite-scroller';
+import { Table, Icon, Switch, Radio, Form, Popconfirm, List, Card, Spin} from 'antd';
 import { observer } from "mobx-react";
 const FormItem = Form.Item;
 import  "./CaseList.less";
@@ -78,61 +79,15 @@ class CaseList extends Component {
         showHeader,
         rowSelection: {},
         scroll: undefined,
-        
+        hasMore: true,
       }
       this.onAdd = this.onAdd.bind(this);
-      this.deleteAction = this.deleteAction.bind(this);
-      this.updateAction = this.updateAction.bind(this);
-      this.onChangePage = this.onChangePage.bind(this);
+      this.props.store.pageSize = 10;
+      this.props.store.pageIndex = 0;
     }
 
     componentWillMount() {
       this.props.store.list();
-    }
-
-    handleToggle = (prop) => {
-      return (enable) => {
-        this.setState({ [prop]: enable });
-      };
-    }
-  
-    handleSizeChange = (e) => {
-      this.setState({ size: e.target.value });
-    }
-  
-    handleHeaderChange = (enable) => {
-      this.setState({ showHeader: enable ? showHeader : false });
-    }
-  
-    handleRowSelectionChange = (enable) => {
-      this.setState({ rowSelection: enable ? {} : undefined });
-    }
-
-
-    saveFormRef = (form) => {
-      this.form = form;
-    }
-
-    handleCancel = () => {
-      // this.setState({ visible: false });
-      this.props.store.visible = false;
-    }
-
-    handleCreate = (data) => {
-      this.props.store.userAdd(data);
-    }
-
-    onAdd() {
-      // this.setState({ visible: true });
-      this.props.store.visible = true;
-    }
-
-    deleteAction() {
-      console.log("asdfasdfasdf");
-    }
-
-    updateAction() {
-      console.log("asdfasdfasdfddd=====");
     }
 
     filterProps = {
@@ -146,29 +101,37 @@ class CaseList extends Component {
     }
 
     onFilterChange (value) {
-      // console.log(value);
       this.props.store.searchParams["params"] = value;
       this.props.store.list();
     }
 
-    onChangePage (current, pageSize) {
-      this.props.store.pageSize = pageSize;
-      this.props.store.pageIndex = current - 1;
-      this.props.store.list();
-    }
+    
 
-    onShowSizeChange (current, pageSize) {
-      this.props.store.pageIndex = 0;
-      this.props.store.pageSize = pageSize;
+    handleInfiniteOnLoad = () => {
+      let data = this.props.store.dataList;
+      this.props.store.loading = true;
+      if (data.length > 14) {
+        message.warning('Infinite List loaded all');
+        this.props.store.hasMore = false;
+        this.props.store.loading = false;
+        return;
+      }
+      this.props.store.pageIndex += 1;
       this.props.store.list();
     }
 
     render() {
       const state = this.state;
-      this.filterProps["onAdd"] = this.onAdd;
       const store = this.props.store;
         return (
-            <div>
+            <div  className="demo-infinite-container">
+              <InfiniteScroll
+                initialLoad={false}
+                pageStart={0}
+                loadMore={this.handleInfiniteOnLoad}
+                hasMore={!this.state.loading && this.state.hasMore}
+                useWindow={false}
+              >
                 <div className="userList-filter">
                 <Filter {...this.filterProps} onFilterChange={this.onFilterChange.bind(this)}/>
                 </div>
@@ -186,9 +149,13 @@ class CaseList extends Component {
                           // description="www.instagram.com" 
                         ></Meta>
                       </Card>
+                      
                     </List.Item>
                   )}
-                />
+                >
+                  {this.props.store.loading && this.props.store.hasMore && <Spin className="demo-loading" />}
+                </List>
+              </InfiniteScroll>
             </div>
         );
     }
