@@ -1,10 +1,12 @@
 import React,{ Component  } from "react";
 import Filter from "./Filter";
+import API from "../../config/API.config";
 import { withRouter } from "react-router-dom";
 import { Table, Icon, Switch, Radio, Form, Popconfirm, List, Card} from 'antd';
 import { observer } from "mobx-react";
 const FormItem = Form.Item;
 import  "./CaseList.less";
+import { Meta } from "antd/lib/list/Item";
 
 const data = [
   {
@@ -170,34 +172,19 @@ class CaseList extends Component {
                 <div className="userList-filter">
                 <Filter {...this.filterProps} onFilterChange={this.onFilterChange.bind(this)}/>
                 </div>
-                {/* <Table columns={columns} dataSource={data} onChange={onChange} /> */}
-                {/* <Table  {...this.state} 
-                rowKey={record => record.registered}
-                columns={param(this.updateAction,this.deleteAction)} 
-                dataSource={this.props.store.caseList} 
-                pagination={{  //分页
-                  total: store.count, //数据总数量
-                  pageSize: store.pageSize,  //显示几条一页
-                  defaultPageSize: store.pageIndex, //默认显示几条一页
-                  showSizeChanger: true,  //是否显示可以设置几条一页的选项
-                  onShowSizeChange:this.onShowSizeChange.bind(this),
-                  // onChange(current) {  //点击改变页数的选项时调用函数，current:将要跳转的页数
-                  //   self.onChangePages.bind(this); 
-                  //   this.onChangePage(current, store.pageSize);
-                  // },   
-                  onChange:this.onChangePage,                                      
-                  showTotal: function () {  //设置显示一共几条数据
-                      return '共 ' + store.count + ' 条数据'; 
-                  }
-                }}
-                /> */}
                 <List
                   grid={{ gutter: 16, column: 3 }}
-                  dataSource={data}
+                  dataSource={this.props.store.dataList}
                   renderItem={item => (
                     <List.Item>
-                      <Card title={item.title}>
-                        <img src="http://f.hiphotos.baidu.com/image/pic/item/503d269759ee3d6db032f61b48166d224e4ade6e.jpg" />
+                      <Card
+                        hoverable
+                        cover={<img src={API.api.baseUrl+item.thumbUrl} />}
+                      >
+                        <Meta 
+                          title={item.title}
+                          // description="www.instagram.com" 
+                        ></Meta>
                       </Card>
                     </List.Item>
                   )}

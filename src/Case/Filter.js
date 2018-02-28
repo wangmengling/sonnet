@@ -4,7 +4,7 @@ import moment from 'moment'
 // import { FilterItem } from 'components'
 import { Form, Button, Row, Col, DatePicker, Input, Cascader, Switch } from 'antd'
 // import city from '../../utils/city'
-
+import "./Filter.less";
 const Search = Input.Search
 const { RangePicker } = DatePicker
 
@@ -82,7 +82,7 @@ const Filter = ({
       {/* <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
         
       </Col> */}
-      <Col {...TwoColProps} xl={{ span: 10 }} md={{ span: 24 }} sm={{ span: 24 }}>
+      <Col className="FilterBoard" {...TwoColProps} xl={{ span: 10 }} md={{ span: 24 }} sm={{ span: 24 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
           <div >
           {getFieldDecorator('username', { initialValue: item.username })(<Search placeholder="Search Name" size="large" onSearch={handleSubmit} />)}
@@ -91,7 +91,6 @@ const Filter = ({
           <div>
             <Button type="primary" size="large" style={{marginRight:20}} onClick={handleSubmit}>搜索</Button>
             <Button size="large" style={{marginRight:20}}  onClick={handleReset}>重置</Button>
-            <Button size="large" type="ghost" onClick={onAdd}>创建用户</Button>
           </div>
         </div>
       </Col>

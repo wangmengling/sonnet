@@ -13,7 +13,8 @@ class CaseStore  extends BaseStore{
     }
 
     @action list() {
-        super.list(API.api.caseCategory.list);
+        super.list(API.api.case.list);
+        console.log(this.dataList);
     }
 
     @action add(name) {

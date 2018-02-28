@@ -1,8 +1,9 @@
 const BaseUrl = "http://localhost:5000";
 const APIV1 = `${BaseUrl}/admin/api/v1`;
 module.exports = {
-    APIV1:'/admin/api/v1',
+    // APIV1:'/admin/api/v1',
     api: {
+        baseUrl:"http://localhost:5000",
         user: {
             login: `${APIV1}/user/login`,
             add: `${APIV1}/user/add`,
@@ -41,6 +42,7 @@ module.exports = {
             delete:`${APIV1}/color/delete`,
         },
         case: {
+            list: `${APIV1}/case/list`,
             addBase: `${APIV1}/case/addBase`,
             updateImageUrl: `${APIV1}/case/updateImageUrl`,
         },
