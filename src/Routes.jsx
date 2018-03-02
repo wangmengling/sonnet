@@ -16,10 +16,11 @@ import PrivateRoute from "../utils/PrivateRoute";
 import DashBoard from "./DashBoard/DashBoard"
 import UserList from "./User";
 import Role from "./Role";
-import {caseList,caseAdd} from "./Case";
+import {caseList,caseAdd,CaseDetail} from "./Case";
 import CaseCategoryList from "./CaseCategory"
 import ColorList from "./Color";
 import StyleList from "./Style";
+
 
 import CaseAdd from "./Case/CaseAdd";
 const location = history.location;
@@ -40,6 +41,7 @@ const Routes = () => (
         <DefaultLayout exact path="/role/list" component={Role}/>
         <DefaultLayout exact path="/case/list" component={caseList}/>
         <DefaultLayout exact path="/case/add" component={caseAdd}/>
+        <DefaultLayout exact path="/case/detail" component={CaseDetail} />
         <DefaultLayout exact path="/caseCategory/list" component={CaseCategoryList} />
         <DefaultLayout exact path="/style/list" component={StyleList} />
         <DefaultLayout exact path="/color/list" component={ColorList} />

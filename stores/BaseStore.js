@@ -6,6 +6,7 @@ class BaseStore {
     @observable searchParams = {};
     @observable pageIndex = 0;
     @observable pageCount = 0;
+    @observable pageIsMoreData = false;
     @observable count = 0;
 
 
@@ -31,7 +32,18 @@ class BaseStore {
             let data = response.data;
             console.log(data);
             if (data.code == 1 && data.data) {
-                this.dataList = data.data["list"];
+                if (this.pageIsMoreData) {
+                    if (this.pageIndex == 0) {
+                        this.dataList = data.data["list"];
+                    } else {
+                        this.dataList = this.dataList.concat(data.data["list"]);
+                    }
+                    if (this.dataList >= data.data["count"]) {
+                        this.pageIsMoreData = false;
+                    }
+                }else {
+                    this.dataList = data.data["list"];
+                }
                 this.pageCount = data.data["pageCount"];
                 this.count = data.data["count"];
                 // console.log(data.data.list);

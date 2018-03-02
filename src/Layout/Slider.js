@@ -56,7 +56,7 @@ class Slider extends React.Component {
         mode="inline"
         // openKeys={this.state.openKeys}
         selectedKeys={[PublicStore.sliderSelectCurrent]}
-        style={{height: '100vh'}}
+        style={{minHeight: '100vh',height:'100%'}}
         onOpenChange={this.onOpenChange}
         onClick={this.handleClick}
         defaultSelectedKeys={["1"]}

@@ -1,6 +1,7 @@
 import React,{ Component } from "react";
 import CaseList from "./CaseList";
 import CaseAdd from "./CaseAdd";
+import CaseDetail from "./CaseDetail";
 // import UserStore from "../../stores/UserStore";
 import {CaseStore, StyleStore, ColorStore, UserStore, UploadStore} from "../../stores";
 
@@ -18,5 +19,6 @@ var caseAdd = () => (
 
 export {
   caseAdd,
-  caseList
+  caseList,
+  CaseDetail
 }

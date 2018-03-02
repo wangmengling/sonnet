@@ -7,7 +7,7 @@ class CaseStore  extends BaseStore{
 
     @observable current = 0; //当前步骤
     @observable isNext = false;
-    @observable hasMore = false;
+    @observable hasMore = true;
 
     constructor() {
         super();
