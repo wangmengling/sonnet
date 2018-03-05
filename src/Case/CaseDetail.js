@@ -14,7 +14,7 @@ class CaseDetail extends Component {
                         <div>龙湖变身大股东，能给城南带来一座天街吗</div>
                         <div>
                             <div>
-
+                                
                             </div>
                             <div className="ImageAndVideo">
                                 <div className="ShowImage"><img style={{width:'100%'}} src="http://s0.ifengimg.com/2018/02/26/ddb26e51b475579111d140ae31159fa2.jpg" /></div>
