@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Menu, Icon, Layout } from 'antd';
 import { Link } from "react-router-dom";
-import { PublicStore } from "../../stores";
+import PublicStore  from "../../stores/PublicStore";
 import { observer } from "mobx-react";
 const SubMenu = Menu.SubMenu;
 const {Sider} = Layout;

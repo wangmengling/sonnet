@@ -5,7 +5,7 @@ import CaseCategoryStore from "./CaseCategoryStore";
 import StyleStore from "./StyleStore";
 import ColorStore from "./ColorStore";
 import UploadStore from "./UploadStore";
-import PublicStore from "./PublicStore";
+// import PublicStore from "./PublicStore";
 export {
     UserStore,
     RoleStore,
@@ -14,5 +14,5 @@ export {
     StyleStore,
     ColorStore,
     UploadStore,
-    PublicStore
+    // PublicStore
 }
