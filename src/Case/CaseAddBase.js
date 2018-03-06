@@ -4,6 +4,7 @@ import { observer } from "mobx-react";
 import { autorun } from "mobx";
 import PropTypes from 'prop-types'
 import "./CaseAddBase.less";
+import { CaseStore } from "../../stores/Index";
 import {Form, Input, Tooltip, Icon, Checkbox, Select, Row, Col, Upload, Button, AutoComplete, DatePicker } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -112,6 +113,8 @@ class CaseAddBaseForm extends Component {
         const { getFieldDecorator } = this.props.form;
         const { autoCompleteResult } = this.state;
 
+        const { detailData } = this.props.store;
+
         const styleStore = this.props.styleStore;
         const colorStore = this.props.colorStore;
         const userStore = this.props.userStore;
@@ -167,6 +170,7 @@ class CaseAddBaseForm extends Component {
                         )}
                     >
                         {getFieldDecorator('title', {
+                            initialValue: detailData.title,
                             rules: [
                             {
                                 required: true, message: 'Please input your Title!',
@@ -179,7 +183,8 @@ class CaseAddBaseForm extends Component {
                         {...formItemLayout}
                         label="婚礼日期"
                     >
-                        {getFieldDecorator('date-picker', {
+                        {getFieldDecorator('time', {
+                            initialValue: detailData.time,
                             rules: [{
                                 type: 'object',
                                 required: true,
@@ -194,7 +199,8 @@ class CaseAddBaseForm extends Component {
                         label="策划人"
                         hasFeedback
                     >
-                        {getFieldDecorator('userName', {
+                        {getFieldDecorator('username', {
+                            initialValue: detailData.username,
                             rules: [
                                 { required: true, message: 'Please select UserName!' },
                             ],
@@ -212,6 +218,7 @@ class CaseAddBaseForm extends Component {
                         label="婚礼风格"
                     >
                         {getFieldDecorator('style', {
+                            initialValue: detailData.style,
                             rules: [
                                 { required: true, message: 'Please select your favourite colors!', type: 'array' },
                             ],
@@ -235,6 +242,7 @@ class CaseAddBaseForm extends Component {
                         )}
                     >
                         {getFieldDecorator('address', {
+                            initialValue: detailData.address,
                             rules: [
                             //     {
                             //     type: 'title', message: 'The input is not valid Title!',
@@ -252,6 +260,7 @@ class CaseAddBaseForm extends Component {
                         label="婚礼色系"
                     >
                         {getFieldDecorator('color', {
+                            initialValue: detailData.color,
                             rules: [
                                 { required: true, message: 'Please select your favourite colors!', type: 'array' },
                             ],

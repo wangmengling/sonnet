@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { autorun } from "mobx";
 import { observer } from "mobx-react";
 import './CaseAddThumbAndVideo.less'
+import API from "../../config/API.config";
 
 import VideoPlayer from '../components/MediaPlayer/VideoPlayer'
 import {
@@ -24,7 +25,7 @@ function getBase64(img, callback) {
 }
 
 
-
+@observer
 class CaseAddThumbAndVideoForm extends Component {
 
     state = {
@@ -201,15 +202,27 @@ class CaseAddThumbAndVideoForm extends Component {
             labelCol: { span: 6 },
             wrapperCol: { span: 14 },
         };
-        const imageUrl = this.state.imageUrl;
-        const videoUrl = this.state.videoUrl;
+        const { detailData } = this.props.store;
+
+        // this.setState({
+        //     imageUrl:detailData.imageUrl,
+        //     videoUrl:detailData.videoUrl
+        // });
+        // this.state.imageUrl = detailData.imageUrl;
+        // this.state.videoUrl = detailData.videoUrl;
+        console.log(detailData.thumbUrl);
+        const imageUrl = API.api.baseUrl+detailData.thumbUrl ;
+        const videoUrl = this.state.videoUrl ;
+        autorun(() => {
+            imageUrl = API.api.baseUrl+detailData.thumbUrl ;
+        });
         const uploadButton = (
             <div>
                 <Icon type={this.state.loading ? 'loading' : 'plus'} />
                 <div className="ant-upload-text">Upload</div>
             </div>
         );
-
+        console.log(imageUrl);
         var cropView = "";
         if (imageUrl) {
             if (this.state.cropStatus) {

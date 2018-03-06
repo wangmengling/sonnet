@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { observer } from "mobx-react";
 import "./CaseAdd.less";
+import { CaseStore } from "../../stores";
+import API from "../../config/API.config";
 import { Steps,Form, Input, Tooltip, Icon, Checkbox, Select, Row, Col, Upload, Button, AutoComplete, DatePicker } from 'antd';
 import CaseAddBase from "./CaseAddBase";
 import CaseAddImage from "./CaseAddImage";
@@ -31,6 +33,13 @@ class CaseAdd extends Component {
         };
     }
 
+    componentWillMount() {
+        // this.props.store.detail();
+        var {caseId} = this.props.location.state;
+        if (caseId) {
+            CaseStore.detailById(API.api.case.detailById,caseId);
+        }
+    }
     
     next() {
         // this.props.store.current = this.props.store.current + 1;
