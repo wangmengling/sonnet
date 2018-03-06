@@ -85,7 +85,7 @@ class BaseStore {
                 this.detailData = data.data;
             }
             this.loading = false;
-            message.info(data.message);
+            // message.info(data.message);
         }).catch((error) => {
             this.loading = false;
             message.info(error.message);

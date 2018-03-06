@@ -6,26 +6,6 @@ import { CaseStore } from "../../stores";
 import "./CaseDetail.less";
 import VideoPlayer from '../components/MediaPlayer/VideoPlayer'
 import API from "../../config/API.config";
-const data = [
-    {
-        title: 'Title 1',
-    },
-    {
-        title: 'Title 2',
-    },
-    {
-        title: 'Title 3',
-    },
-    {
-        title: 'Title 4',
-    },
-    {
-        title: 'Title 5',
-    },
-    {
-        title: 'Title 6',
-    },
-];
 
 @observer
 class CaseDetail extends Component {
