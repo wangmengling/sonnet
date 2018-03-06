@@ -1,19 +1,70 @@
 .CaseDetail {
     background-color: white;
+    font-family: Lato, "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
     .CaseDetailCardBox {
-        box-shadow: 0 0 100px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
         margin-bottom: 20px;
-        
+        .DetailMore {
+            display: flex;
+            flex-direction: row;
+            .DetailMoreCategory {
+                width: 50%;
+                .DetailMoreCategoryLeft {
+                    color: black;
+                }
+                .DetailMoreCategoryRight {
+                    width: 30%;
+                    color: #999999;
+                }   
+                .DetailMoreRight {
+                    width: 30%;
+                }
+                div{
+                    height: 40px;
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+            
+        }
     }
 
-    .ImageAndVideo {
+    .DetailHeader {
         display: flex;
         flex-direction: row;
-        .ShowImage {
-            width: 50%;
+        justify-content: space-between;
+        .DetailTitle {
+            font-family: Lato, "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 30px;
+            line-height: 38px;
+            color: #0d1a26;
+            font-weight: 500;
+            margin-bottom: 40px;
         }
-        .ShowVideo {
-            width: 50%;
+        .DetailAction {
+
         }
+    }
+    
+
+    .CaseDetailCardThumbAndVideo {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
+        .ThumbAndVideo {
+            display: flex;
+            flex-direction: row;
+            .ShowThumb {
+                width: 50%;
+                padding: 10px;
+            }
+            .ShowVideo {
+                width: 50%;
+                padding: 10px;
+            }
+        }
+    }
+
+    .CaseDetailCardImage {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
     }
 }

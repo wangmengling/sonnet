@@ -45,6 +45,7 @@ module.exports = {
             list: `${APIV1}/case/list`,
             addBase: `${APIV1}/case/addBase`,
             updateImageUrl: `${APIV1}/case/updateImageUrl`,
+            detailById: `${APIV1}/case/detailById`,
         },
         upload: {
             video: `${APIV1}/upload/video`,

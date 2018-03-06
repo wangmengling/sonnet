@@ -74,7 +74,7 @@ class BaseStore {
     }
 
     @action detailById(url,_id) {
-        this.delete(url, {_id:_id});
+        this.detail(url, {_id:_id});
     }
 
     @action detail(url,params) {

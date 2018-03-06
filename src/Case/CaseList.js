@@ -88,7 +88,7 @@ class CaseList extends Component {
                         pathname: '/case/detail',
                         search: `?caseId=${item._id}`,
                         // hash: '#the-hash',
-                        // state: { fromDashboard: true }
+                        state: { caseId: item._id }
                       }}>
                       <Card
                         hoverable
