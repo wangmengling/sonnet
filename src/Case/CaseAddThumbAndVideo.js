@@ -46,19 +46,15 @@ class CaseAddThumbAndVideoForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-            // if (!err) {
-            //     console.log('Received values of form: ', values);
-            // }else {
-                // let formData = new FormData();
-                // var index = 0;
-                // formData.append('filedata'+index ,this.state.imgFile);
-                // index++;
-                // formData.append('filedata'+index ,this.state.videoFile);
-                // console.log('fileDDD',formData.get('filedata').type);
-            // }
-            this.handleVideoSubmit();
-            this.handleThumbSubmit();
-            // this.props.store.current = 2;
+            if (this.state.videoUrl) {
+                this.handleVideoSubmit();
+            }
+            if (this.state.imageUrl) {
+                this.handleThumbSubmit();
+            }
+            if (!this.state.imageUrl && !this.state.videoUrl && this.props.store.detailData.thumbUrl && this.props.store.detailData.videoUrl) {
+                this.props.store.current = 2;
+            }
         });
     }
 
@@ -203,19 +199,9 @@ class CaseAddThumbAndVideoForm extends Component {
             wrapperCol: { span: 14 },
         };
         const { detailData } = this.props.store;
-
-        // this.setState({
-        //     imageUrl:detailData.imageUrl,
-        //     videoUrl:detailData.videoUrl
-        // });
-        // this.state.imageUrl = detailData.imageUrl;
-        // this.state.videoUrl = detailData.videoUrl;
-        console.log(detailData.thumbUrl);
-        const imageUrl = API.api.baseUrl+detailData.thumbUrl ;
+        
+        const imageUrl = this.state.imageUrl ;
         const videoUrl = this.state.videoUrl ;
-        autorun(() => {
-            imageUrl = API.api.baseUrl+detailData.thumbUrl ;
-        });
         const uploadButton = (
             <div>
                 <Icon type={this.state.loading ? 'loading' : 'plus'} />
@@ -224,13 +210,13 @@ class CaseAddThumbAndVideoForm extends Component {
         );
         console.log(imageUrl);
         var cropView = "";
-        if (imageUrl) {
+        if (imageUrl || detailData.thumbUrl) {
             if (this.state.cropStatus) {
                 cropView = (
                     <div>
                         <Cropper
                             ref='cropper'
-                            src={imageUrl}
+                            src={imageUrl ? imageUrl :  API.api.baseUrl + detailData.thumbUrl}
                             style={{ height: 400, width: '100%' }}
                             // Cropper.js options
                             aspectRatio={16 / 9}
@@ -242,7 +228,7 @@ class CaseAddThumbAndVideoForm extends Component {
             } else {
                 cropView = (
                     <div>
-                        <img src={this.state.cropResult} style={{ height: 400, width: '100%' }} />
+                        <img src={this.state.cropResult ? this.state.cropResult : API.api.baseUrl + detailData.thumbUrl} style={{ height: 400, width: '100%' }} />
                         <div style={{ marginTop: 10, float: 'right' }}>
                             <Button onClick={this.cropImage.bind(this)} >编辑图片</Button>
                             <Upload 
@@ -288,10 +274,10 @@ class CaseAddThumbAndVideoForm extends Component {
 
 
         var videoView = "";
-        if (videoUrl) {
+        if (videoUrl || detailData.videoUrl) {
             videoView = (
                 <div>
-                    <VideoPlayer src={videoUrl} autoPlay={false} />
+                    <VideoPlayer src={videoUrl ? videoUrl : API.api.baseUrl + detailData.videoUrl} autoPlay={false} />
                     <div style={{ marginTop: 10, float: 'right' }}>
                         <Upload 
                         name="files"

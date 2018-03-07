@@ -102,7 +102,24 @@ class BaseStore {
             let data = response.data;
             if (data.code == 1 && data.data) {
                 this.visible = false;
-                this.updateRole = {};
+            }
+            this.addLoading = false;
+        }).catch((error) => {
+            this.addLoading = false;
+            message.info(error.message);
+        });
+    }
+
+    @action updateByIdAndGetList(url,_id) {
+        this.update(url, {_id:_id});
+    }
+
+    @action updateAndGetList(url,params) {
+        this.addLoading = true;
+        Fetch.post(url,params).then((response) => {
+            let data = response.data;
+            if (data.code == 1 && data.data) {
+                this.visible = false;
             }
             message.info(data.message);
             this.addLoading = false;

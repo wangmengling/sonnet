@@ -17,12 +17,7 @@ module.exports = {
             update:`${APIV1}/role/update`,
             delete:`${APIV1}/role/delete`,
         },
-        case: {
-            add:`${APIV1}/case/add`,
-            list:`${APIV1}/case/list`,
-            update:`${APIV1}/case/update`,
-            delete:`${APIV1}/case/delete`,
-        },
+       
         caseCategory: {
             add:`${APIV1}/caseCategory/add`,
             list:`${APIV1}/caseCategory/list`,
@@ -46,7 +41,14 @@ module.exports = {
             addBase: `${APIV1}/case/addBase`,
             updateImageUrl: `${APIV1}/case/updateImageUrl`,
             detailById: `${APIV1}/case/detailById`,
+            update: `${APIV1}/case/update`,
         },
+        // case: {
+        //     add:`${APIV1}/case/add`,
+        //     list:`${APIV1}/case/list`,
+        //     update:`${APIV1}/case/update`,
+        //     delete:`${APIV1}/case/delete`,
+        // },
         upload: {
             video: `${APIV1}/upload/video`,
             thumb: `${APIV1}/upload/thumb`,

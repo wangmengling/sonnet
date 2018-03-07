@@ -20,6 +20,10 @@ class CaseDetail extends Component {
     }
     render() {
         var detailData= CaseStore.detailData;
+        let time = "";
+        if (detailData.time) {
+            time = (new Date(parseInt(detailData.time))).toLocaleString();
+        }
         return (
             <div className="CaseDetail">
                 <div className="DetailHeader">
@@ -28,7 +32,7 @@ class CaseDetail extends Component {
                     </div>
                     <div className="DetailAction">
                         <Link to={{
-                            pathname: '/case/add',
+                            pathname: '/case/update',
                             search: `?caseId=${detailData._id}`,
                             // hash: '#the-hash',
                             state: { caseId: detailData._id }
@@ -43,12 +47,12 @@ class CaseDetail extends Component {
                     <div className="DetailMore">
                         <div className="DetailMoreCategory">
                             <div>
-                                <span><span className="DetailMoreCategoryLeft">联系人：</span><span className="DetailMoreCategoryRight">{detailData.color}</span></span>
+                                <span><span className="DetailMoreCategoryLeft">联系人：</span><span className="DetailMoreCategoryRight">{detailData.contact}</span></span>
                                 <span className="DetailMoreRight"><span className="DetailMoreCategoryLeft">联系电话：</span><span className="DetailMoreCategoryRight">{detailData.phone}</span></span>
                             </div>
                             <div>
-                                <span><span className="DetailMoreCategoryLeft">策划人：</span><span className="DetailMoreCategoryRight">{detailData.title}</span></span>
-                                <span className="DetailMoreRight"><span className="DetailMoreCategoryLeft">婚礼日期：</span><span className="DetailMoreCategoryRight">2018-04-09</span></span>
+                                <span><span className="DetailMoreCategoryLeft">策划人：</span><span className="DetailMoreCategoryRight">{detailData.username}</span></span>
+                                <span className="DetailMoreRight"><span className="DetailMoreCategoryLeft">婚礼日期：</span><span className="DetailMoreCategoryRight">{time}</span></span>
                             </div>
                             <div>
                                 <span><span className="DetailMoreCategoryLeft">风格：</span><span className="DetailMoreCategoryRight">{detailData.title}</span></span>

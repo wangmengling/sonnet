@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { observer } from "mobx-react";
 import "./CaseAdd.less";
 import { CaseStore } from "../../stores";
@@ -21,6 +21,9 @@ const steps = [{
     content: 'Second-content',
   }, {
     title: '图片',
+    content: 'Three-content',
+  }, {
+    title: '完成',
     content: 'Last-content',
   }];
 
@@ -35,8 +38,10 @@ class CaseAdd extends Component {
 
     componentWillMount() {
         // this.props.store.detail();
-        var {caseId} = this.props.location.state;
-        if (caseId) {
+        this.props.store.detailData = {};
+        this.props.store.current = 0;
+        if (this.props.location.state) {
+            var {caseId} = this.props.location.state;
             CaseStore.detailById(API.api.case.detailById,caseId);
         }
     }
@@ -92,21 +97,30 @@ class CaseAdd extends Component {
             </div>
             <div className="steps-action">
                 {
-                    current < steps.length - 1
+                    current < steps.length - 1 && current > 0
                     &&
                     <Button type="primary" onClick={() => this.next()}>下一步</Button>
                 }
-                {
+                {/* {
                     current === steps.length - 1
                     &&
                     <Button type="primary" onClick={() => message.success('Processing complete!')}>完成</Button>
-                }
+                } */}
                 {
-                    current > 0
+                    current > 0 && current < 3
                     &&
                     <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
                     前一步
                     </Button>
+                }
+                {
+                    current == 3
+                    &&
+                    <Link to="/case/add" >
+                    <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+                    继续添加
+                    </Button>
+                    </Link>
                 }
             </div>
                 

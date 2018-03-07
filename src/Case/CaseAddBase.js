@@ -9,31 +9,25 @@ import {Form, Input, Tooltip, Icon, Checkbox, Select, Row, Col, Upload, Button, 
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
+import moment from 'moment';
 
-const residences = [{
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [{
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [{
-            value: 'xihu',
-            label: 'West Lake',
-        }],
-    }],
-}, {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [{
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [{
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-        }],
-    }],
-}];
-
+Date.prototype.format = function (format) {
+    var args = {
+        "M+": this.getMonth() + 1,
+        "d+": this.getDate(),
+        "h+": this.getHours(),
+        "m+": this.getMinutes(),
+        "s+": this.getSeconds(),
+    };
+    if (/(y+)/.test(format))
+        format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var i in args) {
+        var n = args[i];
+        if (new RegExp("(" + i + ")").test(format))
+            format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? n : ("00" + n).substr(("" + n).length));
+    }
+    return format;
+};
 
 function getBase64(img, callback) {
     const reader = new FileReader();
@@ -78,7 +72,12 @@ class CaseAddBaseForm extends Component {
             if (!err) {
                 console.log('Received values of form: ', values);
                 // this.props.store.current = 1;
-                this.props.store.caseAddBase(values);
+                if (this.props.store.detailData._id) {
+                    this.props.store.update(values,this.props.store.detailData._id);
+                }else {
+                    this.props.store.caseAddBase(values);
+                }
+                
             }
             console.log(values);
         });
@@ -118,6 +117,7 @@ class CaseAddBaseForm extends Component {
         const styleStore = this.props.styleStore;
         const colorStore = this.props.colorStore;
         const userStore = this.props.userStore;
+        const dateFormat = 'YYYY/MM/DD';
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -140,14 +140,14 @@ class CaseAddBaseForm extends Component {
                 },
             },
         };
-        const prefixSelector = getFieldDecorator('prefix', {
-            initialValue: '86',
-        })(
-            <Select style={{ width: 70 }}>
-                <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
-            </Select>
-            );
+        // const prefixSelector = getFieldDecorator('prefix', {
+        //     initialValue: '86',
+        // })(
+        //     <Select style={{ width: 70 }}>
+        //         <Option value="86">+86</Option>
+        //         <Option value="87">+87</Option>
+        //     </Select>
+        //     );
 
 
         autorun(() => {
@@ -155,6 +155,12 @@ class CaseAddBaseForm extends Component {
                 
             }
         });
+        let time = "";
+        if (detailData.time) {
+            time = (new Date(parseInt(detailData.time))).toLocaleString();
+        }else {
+            time = (new Date()).toLocaleString();
+        }
         return (
             <div className="CaseAddBaseContent">
                 <Form className="CaseAddBaseForm"  ref="form"  name="CaseAddBaseForm" id="CaseAddBaseForm" onSubmit={this.handleSubmit}>
@@ -184,14 +190,15 @@ class CaseAddBaseForm extends Component {
                         label="婚礼日期"
                     >
                         {getFieldDecorator('time', {
-                            initialValue: detailData.time,
+                            initialValue: moment(time, dateFormat),
                             rules: [{
                                 type: 'object',
                                 required: true,
                                 message: 'Please select time!'
                             }],
                         })(
-                            <DatePicker />
+                            <DatePicker/>
+                            // <DatePicker defaultValue={moment('2015/01/01', dateFormat)} format={dateFormat}/>
                             )}
                     </FormItem>
                     <FormItem
@@ -212,7 +219,44 @@ class CaseAddBaseForm extends Component {
                             </Select>
                             )}
                     </FormItem>
-
+                    <FormItem
+                        {...formItemLayout}
+                        label={(
+                            <span>
+                                联系人&nbsp;
+                            </span>
+                        )}
+                    >
+                        {getFieldDecorator('contact', {
+                            initialValue: detailData.contact,
+                            // rules: [
+                            // {
+                            //     required: true, 
+                            //     message: 'Please input your contact!',
+                            // }],
+                        })(
+                            <Input />
+                            )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label={(
+                            <span>
+                                联系电话&nbsp;
+                            </span>
+                        )}
+                    >
+                        {getFieldDecorator('phone', {
+                            initialValue: detailData.phone,
+                            // rules: [
+                            // {
+                            //     required: true, 
+                            //     message: 'Please input your contact!',
+                            // }],
+                        })(
+                            <Input />
+                            )}
+                    </FormItem>
                     <FormItem
                         {...formItemLayout}
                         label="婚礼风格"
@@ -220,11 +264,37 @@ class CaseAddBaseForm extends Component {
                         {getFieldDecorator('style', {
                             initialValue: detailData.style,
                             rules: [
-                                { required: true, message: 'Please select your favourite colors!', type: 'array' },
+                                { 
+                                    required: true, 
+                                    message: 'Please select your favourite colors!', 
+                                    // type: 'array' 
+                                },
                             ],
                         })(
                             <Select mode="multiple" placeholder="Please select favourite colors">
                                 {styleStore.dataList.map(
+                                    (data, idx) => <Option value={data.name} key={idx}>{data.name}</Option>
+                                )}
+                            </Select>
+                            )}
+                    </FormItem>
+                    
+
+                    <FormItem
+                        {...formItemLayout}
+                        label="婚礼色系"
+                    >
+                        {getFieldDecorator('color', {
+                            initialValue: detailData.color,
+                            rules: [
+                                { required: true, 
+                                    message: 'Please select your favourite colors!', 
+                                    // type: 'array'
+                                 },
+                            ],
+                        })(
+                            <Select mode="multiple" placeholder="Please select favourite colors">
+                                {colorStore.dataList.map(
                                     (data, idx) => <Option value={data.name} key={idx}>{data.name}</Option>
                                 )}
                             </Select>
@@ -252,24 +322,6 @@ class CaseAddBaseForm extends Component {
                             }],
                         })(
                             <Input />
-                            )}
-                    </FormItem>
-
-                    <FormItem
-                        {...formItemLayout}
-                        label="婚礼色系"
-                    >
-                        {getFieldDecorator('color', {
-                            initialValue: detailData.color,
-                            rules: [
-                                { required: true, message: 'Please select your favourite colors!', type: 'array' },
-                            ],
-                        })(
-                            <Select mode="multiple" placeholder="Please select favourite colors">
-                                {colorStore.dataList.map(
-                                    (data, idx) => <Option value={data.name} key={idx}>{data.name}</Option>
-                                )}
-                            </Select>
                             )}
                     </FormItem>
                     <FormItem {...tailFormItemLayout}>
