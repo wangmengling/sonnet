@@ -18,6 +18,28 @@ class PicturesWall extends React.Component {
     imageUrlArray: []
   };
 
+  componentWillMount() {
+    // this.props.store.detail();
+      const detailData = this.props.store.detailData;
+      var imageUrl = [];
+      if (detailData.imageUrl.length > 0) {
+        var index = -1;
+        detailData.imageUrl.map(function(value){
+          // console.log(value);
+          imageUrl.push({
+            uid: index,
+            name: value[0],
+            status: 'done',
+            url:API.api.baseUrl + value[0]
+          });
+          index++;
+        })
+      }
+      console.log(imageUrl);
+      this.setState({
+        fileList:imageUrl
+      })
+  }
   handleCancel = () => this.setState({ previewVisible: false })
 
   handlePreview = (file) => {
@@ -40,6 +62,7 @@ class PicturesWall extends React.Component {
 
   submitUpload = () => {
     if (this.state.fileList.length > 0) {
+      console.log(this.state.fileList);
       var imageUrl = [];
       this.state.fileList.map(function(value){
         var response = value.response;

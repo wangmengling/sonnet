@@ -9,6 +9,7 @@ import axios from "axios";
 class UploadStore {
     @observable videoStatus: boolean = false;
     @observable thumbStatus: boolean = false;
+    @observable fileList = [];
     @action uploadVideo(formData) {
         this.videoStatus = false;
         var config = {

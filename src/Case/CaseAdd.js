@@ -92,7 +92,7 @@ class CaseAdd extends Component {
                 {
                     current == 2
                     &&
-                    <CaseAddImage />
+                    <CaseAddImage store={this.props.store}/>
                 }
             </div>
             <div className="steps-action">
