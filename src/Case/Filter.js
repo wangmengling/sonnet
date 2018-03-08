@@ -85,7 +85,7 @@ const Filter = ({
       <Col className="FilterBoard" {...TwoColProps} xl={{ span: 10 }} md={{ span: 24 }} sm={{ span: 24 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
           <div >
-          {getFieldDecorator('username', { initialValue: item.username })(<Search placeholder="Search Name" size="large" onSearch={handleSubmit} />)}
+          {getFieldDecorator('title', { initialValue: item.title })(<Search placeholder="Search Name" size="large" onSearch={handleSubmit} />)}
             
           </div>
           <div>

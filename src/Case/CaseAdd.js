@@ -8,6 +8,7 @@ import { Steps,Form, Input, Tooltip, Icon, Checkbox, Select, Row, Col, Upload, B
 import CaseAddBase from "./CaseAddBase";
 import CaseAddImage from "./CaseAddImage";
 import CaseAddThumbAndVideo from "./CaseAddThumbAndVideo";
+import CaseAddComplete from "./CaseAddComplete";
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
@@ -76,6 +77,7 @@ class CaseAdd extends Component {
             {
                     current == 0
                     &&
+                    // <CaseAddComplete  store={this.props.store}/>
                     <CaseAddBase 
                         store={this.props.store} 
                         styleStore={this.props.styleStore} 
@@ -94,10 +96,15 @@ class CaseAdd extends Component {
                     &&
                     <CaseAddImage store={this.props.store}/>
                 }
+                {
+                    current == 3 
+                    && 
+                    <CaseAddComplete  store={this.props.store}/>
+                }
             </div>
             <div className="steps-action">
                 {
-                    current < steps.length - 1 && current > 0
+                    current < steps.length - 2 && current > 0
                     &&
                     <Button type="primary" onClick={() => this.next()}>下一步</Button>
                 }
@@ -113,7 +120,7 @@ class CaseAdd extends Component {
                     前一步
                     </Button>
                 }
-                {
+                {/* {
                     current == 3
                     &&
                     <Link to="/case/add" >
@@ -121,7 +128,7 @@ class CaseAdd extends Component {
                     继续添加
                     </Button>
                     </Link>
-                }
+                } */}
             </div>
                 
             </div>

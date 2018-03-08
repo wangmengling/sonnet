@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Form, Input, InputNumber, Radio, Modal, Cascader, Select } from 'antd'
 // import city from '../../utils/city'
+import { UserStore } from "../../stores";
 
 const FormItem = Form.Item
 const Option = Select.Option;
@@ -16,7 +17,7 @@ const formItemLayout = {
 }
 
 const modal = ({
-  item = {},
+  item = UserStore.updateData,
   onOk,
   roleStore,
   form: {

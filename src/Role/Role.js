@@ -80,14 +80,20 @@ class Role extends Component {
       width: 360,
       render: (text, record, index) => (
         <span>
-          <a title="update"  className="mgl10" onClick={this.onUpdate.bind(this,index)}> 更改 </a>
-          <span className="ant-divider" />
-          <Popconfirm title="删除不可恢复，你确定要删除吗?" onConfirm={this.onDelete.bind(this,index)} >  
-              <a title="用户删除"  className="mgl10" >  
-              <Icon type="delete"/>
-              </a>  
-              {/* onClick={this.onDelete.bind(this,index)} */}
-          </Popconfirm>
+          { record.name !== "管理员"
+            &&
+            <div>
+              <a title="update"  className="mgl10" onClick={this.onUpdate.bind(this,index)}> 更改 </a>
+              <span className="ant-divider" />
+              <Popconfirm title="删除不可恢复，你确定要删除吗?" onConfirm={this.onDelete.bind(this,index)} >  
+                  <a title="用户删除"  className="mgl10" >  
+                  {/* <Icon type="delete"/> */}
+                  删除
+                  </a>  
+                  {/* onClick={this.onDelete.bind(this,index)} */}
+              </Popconfirm>
+            </div>
+          }
         </span>
       ),
     }];

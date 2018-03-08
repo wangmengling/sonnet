@@ -29,7 +29,7 @@ class PicturesWall extends React.Component {
           imageUrl.push({
             uid: index,
             name: value[0],
-            status: 'done',
+            status: 'uploaded',
             url:API.api.baseUrl + value[0]
           });
           index++;
@@ -62,15 +62,22 @@ class PicturesWall extends React.Component {
 
   submitUpload = () => {
     if (this.state.fileList.length > 0) {
-      console.log(this.state.fileList);
       var imageUrl = [];
       this.state.fileList.map(function(value){
-        var response = value.response;
-        if (response && response.code == 1) {
-          imageUrl.push(response.data);
+        var status = value.status
+        if (status == "uploaded") {
+          imageUrl.push(value.name);
+        }else {
+          var response = value.response;
+          if (response && response.code == 1) {
+            imageUrl.push(response.data);
+          }
         }
+        
       })
       var params = {"_id":CaseStore.detailData._id,"imageUrl":imageUrl};
+      console.log(params);
+      console.log(this.state.fileList);
       CaseStore.updateImageUrl(params);
     }
   }

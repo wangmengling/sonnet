@@ -16,6 +16,7 @@ class UserStore {
 
     @observable addLoading: boolean = false;
     @observable visible: boolean = false;
+    @observable updateData = {};
 
     history = {};
 
@@ -117,9 +118,26 @@ class UserStore {
         console.log(params);
         Fetch.post(API.api.user.add,params).then((response) => {
             let data = response.data;
-            console.log(data);
             if (data.code == 1 && data.data) {
-                console.log(data.data);
+                this.visible = false
+                this.list();
+            }
+            message.info(data.message);
+            this.addLoading = false;
+        }).catch((error) => {
+            this.addLoading = false;
+            message.info(error.message);
+            console.log(error);
+            this.visible = false
+        });
+    }
+
+    @action userUpdate(params) {
+        this.addLoading = true;
+        console.log(params);
+        Fetch.post(API.api.user.update,params).then((response) => {
+            let data = response.data;
+            if (data.code == 1 && data.data) {
                 this.visible = false
                 this.list();
             }

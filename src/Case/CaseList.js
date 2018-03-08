@@ -34,7 +34,7 @@ class CaseList extends Component {
       },
       
       onSearch (fieldsValue) {
-        // console.log(fieldsValue);
+        console.log(fieldsValue);
       },
     }
 

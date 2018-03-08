@@ -7,64 +7,9 @@ import UserAdd from "./UserAdd";
 const FormItem = Form.Item;
 import  "./UserList.less";
 
-const columns = [{
-  title: '名字',
-  dataIndex: 'username',
-  key: 'username',
-  width: 150,
-  render: text => <a href="#">{text}</a>,
-},{
-  title: '角色',
-  dataIndex: 'role',
-  key: 'role',
-  width: 150,
-  render: text => <a href="#">{text}</a>,
-},  {
-  title: '操作',
-  key: 'action',
-  width: 360,
-  render: (text, record) => (
-    <span>
-      <a href="#">详情</a>
-      <span className="ant-divider" />
-      <a href="#">删除</a>
-      <span className="ant-divider" />
-    </span>
-  ),
-}];
 
-const param = (updateAction,deleteAction) => {
-  return [{
-    title: '名字',
-    dataIndex: 'username',
-    key: 'username',
-    width: 150,
-    render: text => <a href="#">{text}</a>,
-  },{
-    title: '角色',
-    dataIndex: 'role',
-    key: 'role',
-    width: 150,
-    render: text => <a href="#">{text}</a>,
-  },  {
-    title: '操作',
-    key: 'action',
-    width: 360,
-    render: (text, record) => (
-      <span>
-        <a title="update"  className="mgl10" onClick={updateAction}> 更改 </a>
-        <span className="ant-divider" />
-        <Popconfirm title="删除不可恢复，你确定要删除吗?" onConfirm={deleteAction} >  
-            <a title="用户删除"  className="mgl10" >  
-            {/* <Icon type="delete"/> */}
-            删除
-            </a>  
-            {/* onClick={this.onDelete.bind(this,index)} */}
-        </Popconfirm>
-      </span>
-    ),
-  }];
-};
+
+
 
 
 // const expandedRowRender = record => <p>{record.description}</p>;
@@ -104,6 +49,42 @@ class UserList extends Component {
       this.onChangePage = this.onChangePage.bind(this);
     }
 
+    param = [{
+      title: '名字',
+      dataIndex: 'username',
+      key: 'username',
+      width: 150,
+      render: text => <a href="#">{text}</a>,
+    },{
+      title: '角色',
+      dataIndex: 'role',
+      key: 'role',
+      width: 150,
+      render: text => <a href="#">{text}</a>,
+    },  {
+      title: '操作',
+      key: 'action',
+      width: 360,
+      render: (text, record,index) => (
+        <span>
+           { record.role !== "管理员"
+              &&
+              <div>
+                <a title="update"  className="mgl10" onClick={this.updateAction.bind(this,index)}> 更改 </a>
+                {/* <span className="ant-divider" /> */}
+                {/* <Popconfirm title="删除不可恢复，你确定要删除吗?" onConfirm={this.deleteAction.bind(this,index)}>   */}
+                    {/* <a title="用户删除"  className="mgl10" >   */}
+                    {/* <Icon type="delete"/> */}
+                    {/* 删除 */}
+                    {/* </a>   */}
+                    {/* onClick={this.onDelete.bind(this,index)} */}
+                {/* </Popconfirm> */}
+          </div>
+           }
+        </span>
+      ),
+    }];
+
     componentWillMount() {
       this.props.store.list();
       this.props.roleStore.getRoleList();
@@ -138,20 +119,29 @@ class UserList extends Component {
     }
 
     handleCreate = (data) => {
-      this.props.store.userAdd(data);
+      if (this.props.store.updateData._id) {
+        data._id = this.props.store.updateData._id;
+        this.props.store.userUpdate(data);
+      }else {
+        this.props.store.userAdd(data);
+      }
+      
     }
 
     onAdd() {
-      // this.setState({ visible: true });
+      this.props.store.updateData = {};
       this.props.store.visible = true;
     }
 
-    deleteAction() {
-      console.log("asdfasdfasdf");
+    deleteAction(index) {
+      
     }
 
-    updateAction() {
-      console.log("asdfasdfasdfddd=====");
+    updateAction(index) {
+      const data = this.props.store.userList[index]
+      // this.props.store.update(data.name,data._id)
+      this.props.store.visible = true;
+      this.props.store.updateData = data;
     }
 
     filterProps = {
@@ -194,7 +184,7 @@ class UserList extends Component {
                 {/* <Table columns={columns} dataSource={data} onChange={onChange} /> */}
                 <Table  {...this.state} 
                 rowKey={record => record.registered}
-                columns={param(this.updateAction,this.deleteAction)} 
+                columns={this.param} 
                 dataSource={this.props.store.userList} 
                 pagination={{  //分页
                   total: store.count, //数据总数量
