@@ -219,6 +219,72 @@ class CaseAddBaseForm extends Component {
                             </Select>
                             )}
                     </FormItem>
+                    
+                    <FormItem
+                        {...formItemLayout}
+                        label="婚礼风格"
+                    >
+                        {getFieldDecorator('style', {
+                            initialValue: detailData.style,
+                            rules: [
+                                { 
+                                    required: true, 
+                                    message: 'Please select your favourite style!', 
+                                    // type: 'array' 
+                                },
+                            ],
+                        })(
+                            <Select mode="multiple" placeholder="Please select favourite style">
+                                {styleStore.dataList.map(
+                                    (data, idx) => <Option value={data.name} key={idx}>{data.name}</Option>
+                                )}
+                            </Select>
+                            )}
+                    </FormItem>
+                    
+
+                    <FormItem
+                        {...formItemLayout}
+                        label="婚礼色系"
+                    >
+                        {getFieldDecorator('color', {
+                            initialValue: detailData.color,
+                            rules: [
+                                { required: true, 
+                                    message: 'Please select your favourite colors!', 
+                                    // type: 'array'
+                                 },
+                            ],
+                        })(
+                            <Select mode="multiple" placeholder="Please select favourite colors">
+                                {colorStore.dataList.map(
+                                    (data, idx) => <Option value={data.name} key={idx}>{data.name}</Option>
+                                )}
+                            </Select>
+                            )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="室内室外"
+                    >
+                        {getFieldDecorator('position', {
+                            initialValue: detailData.position,
+                            rules: [
+                                { required: true, 
+                                    message: 'Please select your favourite position!', 
+                                    // type: 'array'
+                                 },
+                            ],
+                        })(
+                            <Select mode="single" placeholder="Please select favourite position">
+                                {/* {colorStore.dataList.map(
+                                    (data, idx) => <Option value={data.name} key={idx}>{data.name}</Option>
+                                )} */}
+                                <Option value="室内" key="0">室内</Option>
+                                <Option value="室外" key="1">室外</Option>
+                            </Select>
+                            )}
+                    </FormItem>
                     <FormItem
                         {...formItemLayout}
                         label={(
@@ -259,53 +325,10 @@ class CaseAddBaseForm extends Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="婚礼风格"
-                    >
-                        {getFieldDecorator('style', {
-                            initialValue: detailData.style,
-                            rules: [
-                                { 
-                                    required: true, 
-                                    message: 'Please select your favourite colors!', 
-                                    // type: 'array' 
-                                },
-                            ],
-                        })(
-                            <Select mode="multiple" placeholder="Please select favourite colors">
-                                {styleStore.dataList.map(
-                                    (data, idx) => <Option value={data.name} key={idx}>{data.name}</Option>
-                                )}
-                            </Select>
-                            )}
-                    </FormItem>
-                    
-
-                    <FormItem
-                        {...formItemLayout}
-                        label="婚礼色系"
-                    >
-                        {getFieldDecorator('color', {
-                            initialValue: detailData.color,
-                            rules: [
-                                { required: true, 
-                                    message: 'Please select your favourite colors!', 
-                                    // type: 'array'
-                                 },
-                            ],
-                        })(
-                            <Select mode="multiple" placeholder="Please select favourite colors">
-                                {colorStore.dataList.map(
-                                    (data, idx) => <Option value={data.name} key={idx}>{data.name}</Option>
-                                )}
-                            </Select>
-                            )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
                         label={(
                             <span>
                                 地址&nbsp;
-                                <Tooltip title="What do you want others to call you?">
+                                <Tooltip title="酒店名称或者酒店地址?">
                                     <Icon type="question-circle-o" />
                                 </Tooltip>
                             </span>

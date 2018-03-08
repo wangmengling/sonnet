@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { observer } from "mobx-react";
 import { Form, Input, InputNumber, Radio, Modal, Cascader, Spin } from 'antd'
 
 const formItemLayout = {
@@ -11,6 +12,7 @@ const formItemLayout = {
     },
   }
 const FormItem = Form.Item
+@observer
 class StyleAdd extends React.Component {
     constructor(props) {
         super(props);
