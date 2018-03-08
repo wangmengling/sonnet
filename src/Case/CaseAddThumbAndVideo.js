@@ -108,9 +108,9 @@ class CaseAddThumbAndVideoForm extends Component {
         if (!isMP4) {
             message.error('You can only upload MP4 file!');
         }
-        const isLt2M = file.size / 1024 / 1024 < 20;
+        const isLt2M = file.size / 1024 / 1024 < 200;
         if (!isLt2M) {
-            message.error('Image must smaller than 20MB!');
+            message.error('视频必须小于200M!');
         }
         if (isMP4 && isLt2M) {
             this.setState(({ videoFile }) => ({
