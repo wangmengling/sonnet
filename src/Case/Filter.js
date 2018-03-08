@@ -37,6 +37,12 @@ const Filter = ({
     // if (createTime.length) {
     //   fields.createTime = [createTime[0].format('YYYY-MM-DD'), createTime[1].format('YYYY-MM-DD')]
     // }
+    const { title } = fields
+    if (title.length > 0) {
+      // fields.createTime = [createTime[0].format('YYYY-MM-DD'), createTime[1].format('YYYY-MM-DD')]
+      fields.title = {$regex:title};
+    }
+    console.log(fields);
     return fields
   }
 

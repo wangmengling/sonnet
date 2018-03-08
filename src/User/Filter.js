@@ -37,6 +37,10 @@ const Filter = ({
     // if (createTime.length) {
     //   fields.createTime = [createTime[0].format('YYYY-MM-DD'), createTime[1].format('YYYY-MM-DD')]
     // }
+    const { username } = fields
+    if (username && username.length > 0) {
+      fields.username = {$regex:username};
+    }
     return fields
   }
 
