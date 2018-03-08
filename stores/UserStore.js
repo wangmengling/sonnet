@@ -47,7 +47,10 @@ class UserStore {
      * @constructor
      */
     constructor () {
-        this.userModel = {};
+        let userModel = localStorage.getItem("loginUserBaseInfo");
+        if (userModel) {
+            this.userModel = JSON.parse(userModel);
+        }
     }
 
     @action login(userName,password) {
@@ -60,7 +63,10 @@ class UserStore {
             if (data.code == 1 && data.data) {
                 localStorage.setItem("token",data.data.token);
                 this.userModel = data.data;
-                localStorage.setItem("loginUserBaseInfo",this.userModel);
+                const loginUserBaseInfo = JSON.stringify(this.userModel);
+                // console.log(loginUserBaseInfo);
+                // console.log(data.data);
+                localStorage.setItem("loginUserBaseInfo",loginUserBaseInfo);
             }
             this.loading = false;
             message.info(data.message);

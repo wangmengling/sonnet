@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import { message } from 'antd';
 import { setTimeout } from 'timers';
+import history from "../src/History";
 
 const fakeAuth = {
     // isAuthenticated: localStorage.getItem("token"),
@@ -29,10 +30,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         fakeAuth.isAuthenticated ? (
           <Component {...props}/>
         ) : (
-          <Redirect to={{
-            pathname: '/login',
-            state: { from: props.location }
-          }}/>
+          // <Redirect to={{
+          //   pathname: '/login',
+          //   state: { from: props.location }
+          // }}/>
+          history.push("/login")
         )
     )}/>
   ) 

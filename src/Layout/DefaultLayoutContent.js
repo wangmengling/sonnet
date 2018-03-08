@@ -6,6 +6,14 @@ import HeaderView from "./HeaderView";
 import Slider from "./Slider";
 import './DefaultLayoutContent.less';
 class DefaultLayoutContent extends React.Component {
+
+  componentDidMount () {
+    let userModel = localStorage.getItem("loginUserBaseInfo");
+    if (userModel) {
+      UserStore.userModel= userModel;
+      console.log(userModel);
+    }
+  }
   state = {
     collapsed: false,
   };
