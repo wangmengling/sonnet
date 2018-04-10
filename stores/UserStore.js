@@ -49,7 +49,8 @@ class UserStore {
     constructor () {
         let userModel = localStorage.getItem("loginUserBaseInfo");
         if (userModel) {
-            this.userModel = JSON.parse(userModel);
+            console.log(userModel);
+            // this.userModel = JSON.parse(userModel);
         }
     }
 
