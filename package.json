@@ -54,7 +54,7 @@
     "jsx-loader": "^0.13.2",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
-    "node-sass": "^4.6.1",
+    "node-sass": "^4.9.3",
     "nodemon": "^1.8.1",
     "postcss-easy-import": "^3.0.0",
     "postcss-loader": "^2.0.8",
