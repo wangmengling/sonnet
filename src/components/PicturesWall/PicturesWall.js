@@ -25,12 +25,11 @@ class PicturesWall extends React.Component {
       if (detailData.imageUrl.length > 0) {
         var index = -1;
         detailData.imageUrl.map(function(value){
-          // console.log(value);
           imageUrl.push({
             uid: index,
-            name: value[0],
+              response:{data:value[0]},
             status: 'uploaded',
-            url:API.api.baseUrl + value[0]
+            url:API.api.baseUrl + value[0]['src']
           });
           index++;
         })
@@ -61,19 +60,20 @@ class PicturesWall extends React.Component {
   }
 
   submitUpload = () => {
+
     if (this.state.fileList.length > 0) {
       var imageUrl = [];
       this.state.fileList.map(function(value){
         var status = value.status
-        if (status == "uploaded") {
-          imageUrl.push(value.name);
-        }else {
+        // if (status == "uploaded") {
+        //   imageUrl.push(value.name);
+        // }else {
           var response = value.response;
           if (response && response.code == 1) {
             imageUrl.push(response.data);
           }
-        }
-        
+        // }
+        console.log(value)
       })
       var params = {"_id":CaseStore.detailData._id,"imageUrl":imageUrl};
       console.log(params);
