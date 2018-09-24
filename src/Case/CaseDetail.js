@@ -96,7 +96,7 @@ class CaseDetail extends Component {
                                     bodyStyle={{ padding: '0px' }}
                                 // cover={<img src={API.api.baseUrl + item} />}
                                 >
-                                    <img style={{ width: '100%', height: '100%' }} src={API.api.baseUrl + item} onClick={() => this.setState({ isOpen: true,photoIndex:index })}/>
+                                    <img style={{ width: '100%', height: '100%' }} src={API.api.baseUrl + item[0]["src"]} onClick={() => this.setState({ isOpen: true,photoIndex:index })}/>
                                 </Card>
                             </List.Item>
                         )}
@@ -104,9 +104,9 @@ class CaseDetail extends Component {
                 </Card>
                 {isOpen && (
                     <Lightbox
-                        mainSrc={API.api.baseUrl + detailData.imageUrl[photoIndex]}
-                        nextSrc={API.api.baseUrl + detailData.imageUrl[(photoIndex + 1) % detailData.imageUrl.length]}
-                        prevSrc={API.api.baseUrl + detailData.imageUrl[(photoIndex + detailData.imageUrl.length - 1) % detailData.imageUrl.length]}
+                        mainSrc={API.api.baseUrl + detailData.imageUrl[photoIndex][0]["src"]}
+                        nextSrc={API.api.baseUrl + detailData.imageUrl[(photoIndex + 1) % detailData.imageUrl.length][0]["src"]}
+                        prevSrc={API.api.baseUrl + detailData.imageUrl[(photoIndex + detailData.imageUrl.length - 1) % detailData.imageUrl.length][0]["src"]}
                         onCloseRequest={() => this.setState({ isOpen: false })}
                         onMovePrevRequest={() =>
                             this.setState({
