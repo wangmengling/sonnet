@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { autorun } from "mobx";
 import PropTypes from 'prop-types'
 import "./CaseAddBase.less";
-import { CaseStore } from "../../stores/Index";
+import { CaseStore } from "../../stores/index";
 import {Form, Input, Tooltip, Icon, Checkbox, Select, Row, Col, Upload, Button, AutoComplete, DatePicker } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;

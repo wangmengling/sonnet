@@ -1,7 +1,7 @@
 import React from "react";
 import { Upload, Icon, Modal, Input, Button } from 'antd';
 import API from "../../../config/API.config";
-import { CaseStore } from "../../../stores/Index";
+import { CaseStore } from "../../../stores/index";
 
 class PicturesWall extends React.Component {
   state = {
