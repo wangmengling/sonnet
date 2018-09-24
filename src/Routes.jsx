@@ -9,17 +9,17 @@ import {
 import history from "./History";
 import App from './App';
 import About from './About';
-import Login from './Login/Index';
+import Login from './Login/index';
 import Register from './Register/Register';
 import DefaultLayout from "./Layout/DefaultLayout";
 import PrivateRoute from "../utils/PrivateRoute";
 import DashBoard from "./DashBoard/DashBoard"
-import UserList from "./User";
-import Role from "./Role";
-import {caseList,caseAdd,CaseDetail} from "./Case";
-import CaseCategoryList from "./CaseCategory"
-import ColorList from "./Color";
-import StyleList from "./Style";
+import UserList from "./User/index";
+import Role from "./Role/index";
+import {caseList,caseAdd,CaseDetail} from "./Case/index";
+import CaseCategoryList from "./CaseCategory/index"
+import ColorList from "./Color/index";
+import StyleList from "./Style/index";
 
 
 import CaseAdd from "./Case/CaseAdd";

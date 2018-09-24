@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7daa4826-a6cb-4763-9057-41b80e0e6b8f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Case/CaseAddBase.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Case/CaseAddBase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PicturesWall/PicturesWall.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PicturesWall/PicturesWall.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -44,19 +43,20 @@
     <session id="-1594747616">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.8" value="2" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="babelrc" value="1" />
-          <entry key="js" value="16" />
+          <entry key="js" value="24" />
           <entry key="json" value="3" />
+          <entry key="jsx" value="1" />
           <entry key="less" value="4" />
           <entry key="ts" value="1" />
         </counts>
@@ -64,7 +64,8 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="4" />
-          <entry key="JavaScript" value="16" />
+          <entry key="JSX Harmony" value="1" />
+          <entry key="JavaScript" value="24" />
           <entry key="Less" value="4" />
           <entry key="TypeScript" value="1" />
         </counts>
@@ -72,15 +73,17 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="babelrc" value="6" />
-          <entry key="js" value="110" />
+          <entry key="js" value="111" />
           <entry key="json" value="2" />
+          <entry key="jsx" value="22" />
           <entry key="less" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="8" />
-          <entry key="JavaScript" value="110" />
+          <entry key="JSX Harmony" value="22" />
+          <entry key="JavaScript" value="111" />
           <entry key="Less" value="2" />
         </counts>
       </usages-collector>
@@ -106,18 +109,11 @@
         <entry file="file://$PROJECT_DIR$/src/Case/CaseAddBase.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="17" column="30" lean-forward="true" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+              <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/babel-loader/lib/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2084" />
           </provider>
         </entry>
       </file>
@@ -131,31 +127,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package-lock.json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Case/CaseAdd.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stores/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
@@ -168,21 +139,55 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.js">
+        <entry file="file://$PROJECT_DIR$/src/Layout/DefaultLayout.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="33" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+            <state relative-caret-position="210">
+              <caret line="14" column="36" lean-forward="true" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Result/index.js">
+        <entry file="file://$PROJECT_DIR$/src/User/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="180">
+              <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
               <folding>
-                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#0#40#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/PrivateRoute.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+              <folding>
+                <element signature="e#1#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Role/Role.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="570">
+              <caret line="38" column="17" lean-forward="true" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Routes.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -218,6 +223,8 @@
         <option value="$PROJECT_DIR$/stores/Index.js" />
         <option value="$PROJECT_DIR$/src/Case/CaseAddBase.js" />
         <option value="$PROJECT_DIR$/stores/index.js" />
+        <option value="$PROJECT_DIR$/utils/PrivateRoute.js" />
+        <option value="$PROJECT_DIR$/src/Routes.jsx" />
       </list>
     </option>
   </component>
@@ -264,12 +271,129 @@
               <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
               <item name="sonnet" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Breadcaumd" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Case" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
               <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="CaseCategory" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Color" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="ImageItem" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="MediaPlayer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="PicturesWall" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Result" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="DashBoard" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Layout" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Login" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Order" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Register" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Role" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Style" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="themes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="User" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
               <item name="stores" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonnet" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -326,12 +450,13 @@
       <workItem from="1535189168988" duration="6445000" />
       <workItem from="1537589815728" duration="4765000" />
       <workItem from="1537668383651" duration="705000" />
-      <workItem from="1537767030155" duration="1458000" />
+      <workItem from="1537767030155" duration="2210000" />
+      <workItem from="1537774895098" duration="28000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21696000" />
+    <option name="totallyTimeSpent" value="22476000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="3" y="23" width="1678" height="905" extended-state="0" />
@@ -404,11 +529,6 @@
     <entry file="file://$PROJECT_DIR$/public/admin.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-456" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Routes.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-618" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
@@ -543,10 +663,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Case/CaseAddComplete.less">
+    <entry file="file://$PROJECT_DIR$/node_modules/babel-loader/lib/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2084" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Role/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="46" selection-start-column="46" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Case/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="11" lean-forward="true" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -560,16 +697,18 @@
     <entry file="file://$PROJECT_DIR$/src/Case/CaseAddBase.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="17" column="30" lean-forward="true" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+          <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/babel-loader/lib/index.js">
+    <entry file="file://$PROJECT_DIR$/src/Case/CaseAddComplete.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2084" />
+        <state>
+          <caret column="46" selection-start-column="46" selection-end-column="46" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/stores/index.js">
@@ -579,6 +718,50 @@
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Layout/DefaultLayout.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="36" lean-forward="true" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/User/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/PrivateRoute.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+          <folding>
+            <element signature="e#1#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Role/Role.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" column="17" lean-forward="true" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Routes.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
         </state>
       </provider>
     </entry>
