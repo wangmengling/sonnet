@@ -89,7 +89,7 @@ class UserStore {
     }
 
     @computed get isLogin() {
-        return localStorage.getItem("token") != null;
+        return localStorage.getItem("token") != null && localStorage.getItem("token").length > 10;
     }
 
     @computed get loginCompleted() {

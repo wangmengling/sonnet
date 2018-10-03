@@ -4,6 +4,7 @@ import {
   // BrowserRouter as Router,
   Route,
   Link,
+    Redirect,
   hashRouter
 } from 'react-router-dom'
 import history from "./History";
@@ -23,6 +24,7 @@ import StyleList from "./Style/index";
 
 
 import CaseAdd from "./Case/CaseAdd";
+import UserStore from "../stores/UserStore";
 const location = history.location;
 const unlisten = history.listen((location,action) => {
   console.log(action,location.pathname,location.state);
@@ -32,7 +34,13 @@ const Routes = () => (
     <Router history={history}> 
       <div>
         <Route exact path="/login" component={Login}/>
-        <Route exact path="/" component={App}/>
+        <Route exact path="/" render={() => (
+            UserStore.isLogin ? (
+                <Redirect to="/dashBoard"/>
+            ) : (
+                <Redirect to="/login"/>
+            )
+        )} />
         <Route exact path="/about" component={About}/>
         
         <DefaultLayout exact path="/register" component={Register}/>
